@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_MenuFragment_to_ProfilesFragment"
             app:destination="@id/ProfilesFragment" />
+        <action
+            android:id="@+id/action_MenuFragment_to_ListFragment"
+            app:destination="@id/ListFragment" />
     </fragment>
     <fragment
         android:id="@+id/ProfilesFragment"
@@ -23,6 +26,14 @@
 
         <action
             android:id="@+id/action_ProfilesFragment_to_MenuFragment"
+            app:destination="@id/MenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ListFragment"
+        android:name="com.example.a500011dproject.ListFragment"
+        android:label="@string/list_fragment_label" >
+        <action
+            android:id="@+id/action_ListFragment_to_MenuFragment"
             app:destination="@id/MenuFragment" />
     </fragment>
 </navigation>

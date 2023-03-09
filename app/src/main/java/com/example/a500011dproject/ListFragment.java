@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.a500011dproject.databinding.FragmentMenuBinding;
+import com.example.a500011dproject.databinding.FragmentListBinding;
 
-public class MenuFragment extends Fragment {
+public class ListFragment extends Fragment {
 
-    private FragmentMenuBinding binding;
+    private FragmentListBinding binding;
 
     @Override
     public View onCreateView(
@@ -21,7 +21,7 @@ public class MenuFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentMenuBinding.inflate(inflater, container, false);
+        binding = FragmentListBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -29,18 +29,11 @@ public class MenuFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.menuButtonProfiles.setOnClickListener(new View.OnClickListener() {
+        binding.listButtonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(MenuFragment.this)
-                        .navigate(R.id.action_MenuFragment_to_ProfilesFragment);
-            }
-        });
-        binding.menuButtonList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(MenuFragment.this)
-                        .navigate(R.id.action_MenuFragment_to_ListFragment);
+                NavHostFragment.findNavController(ListFragment.this)
+                        .navigate(R.id.action_ListFragment_to_MenuFragment);
             }
         });
     }

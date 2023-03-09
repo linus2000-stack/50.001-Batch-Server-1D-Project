@@ -19,33 +19,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_profiles"
+        android:id="@+id/menu_button_profiles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:text="@string/button_profiles"
-        app:layout_constraintBottom_toTopOf="@+id/button_map"
+        android:text="@string/menu_button_profiles"
+        app:layout_constraintBottom_toTopOf="@+id/menu_button_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_map"
+        android:id="@+id/menu_button_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="128dp"
-        android:text="@string/button_map"
+        android:text="@string/menu_button_map"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_list"
+        android:id="@+id/menu_button_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:text="@string/button_list"
-        app:layout_constraintBottom_toTopOf="@+id/button_profiles"
+        android:text="@string/menu_button_list"
+        app:layout_constraintBottom_toTopOf="@+id/menu_button_profiles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
