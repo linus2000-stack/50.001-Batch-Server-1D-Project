@@ -33,14 +33,21 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(MenuFragment.this)
-                        .navigate(R.id.action_MenuFragment_to_ProfilesFragment);
+                        .navigate(R.id.action_menuFragment_to_profilesFragment);
             }
         });
         binding.menuButtonList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(MenuFragment.this)
-                        .navigate(R.id.action_MenuFragment_to_ListFragment);
+                        .navigate(R.id.action_menuFragment_to_listFragment);
+            }
+        });
+        binding.menuButtonMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(MenuFragment.this)
+                        .navigate(R.id.action_menuFragment_to_mapFragment);
             }
         });
     }

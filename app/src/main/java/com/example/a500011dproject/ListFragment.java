@@ -33,7 +33,7 @@ public class ListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(ListFragment.this)
-                        .navigate(R.id.action_ListFragment_to_MenuFragment);
+                        .navigate(R.id.action_listFragment_to_menuFragment);
             }
         });
     }

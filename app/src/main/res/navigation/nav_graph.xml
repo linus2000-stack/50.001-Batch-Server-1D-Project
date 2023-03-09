@@ -3,37 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/MenuFragment">
+    app:startDestination="@id/menuFragment">
 
     <fragment
-        android:id="@+id/MenuFragment"
+        android:id="@+id/menuFragment"
         android:name="com.example.a500011dproject.MenuFragment"
         android:label="@string/menu_fragment_label"
         tools:layout="@layout/fragment_menu">
 
         <action
-            android:id="@+id/action_MenuFragment_to_ProfilesFragment"
-            app:destination="@id/ProfilesFragment" />
+            android:id="@+id/action_menuFragment_to_profilesFragment"
+            app:destination="@id/profilesFragment" />
         <action
-            android:id="@+id/action_MenuFragment_to_ListFragment"
-            app:destination="@id/ListFragment" />
+            android:id="@+id/action_menuFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
-        android:id="@+id/ProfilesFragment"
+        android:id="@+id/profilesFragment"
         android:name="com.example.a500011dproject.ProfilesFragment"
         android:label="@string/profiles_fragment_label"
         tools:layout="@layout/fragment_profiles">
 
         <action
-            android:id="@+id/action_ProfilesFragment_to_MenuFragment"
-            app:destination="@id/MenuFragment" />
+            android:id="@+id/action_profilesFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
     <fragment
-        android:id="@+id/ListFragment"
+        android:id="@+id/listFragment"
         android:name="com.example.a500011dproject.ListFragment"
         android:label="@string/list_fragment_label" >
         <action
-            android:id="@+id/action_ListFragment_to_MenuFragment"
-            app:destination="@id/MenuFragment" />
+            android:id="@+id/action_listFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.a500011dproject.MapFragment"
+        android:label="@string/map_fragment_label"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 </navigation>

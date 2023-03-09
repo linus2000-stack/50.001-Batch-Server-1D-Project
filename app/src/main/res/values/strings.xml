@@ -17,5 +17,7 @@
     <string name="list_fragment_label">Restaurants</string>
     <string name="list_button_menu">Main Menu</string>
 
+    <string name="map_fragment_label">Location</string>
+    <string name="map_button_menu">Main Menu</string>
 
 </resources>

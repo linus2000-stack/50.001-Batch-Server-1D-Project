@@ -33,7 +33,7 @@ public class ProfilesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(ProfilesFragment.this)
-                        .navigate(R.id.action_ProfilesFragment_to_MenuFragment);
+                        .navigate(R.id.action_profilesFragment_to_menuFragment);
             }
         });
     }
