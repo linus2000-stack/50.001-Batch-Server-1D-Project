@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+<!--    added permissions to use the google maps sdk for android to access current location-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.500011DProject"
         tools:targetApi="31">
+
 
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -25,8 +32,12 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDpbgKm529KrOdGdj8VXsg2iXzxu32osCQ" />
+            android:value="AIzaSyAXb0dZfCYOUY-o3a_CvnQqoHwyhmIr08M"/>
 
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -39,5 +50,7 @@
             </intent-filter>
         </activity>
     </application>
+
+
 
 </manifest>
