@@ -5,6 +5,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -47,8 +48,8 @@ public class MapsActivity extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},requestCode);
-        return;
+            ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, requestCode);
+            return;
         }
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -56,14 +57,13 @@ public class MapsActivity extends AppCompatActivity {
                         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                             @Override
                             public void onMapReady(@NonNull GoogleMap googleMap) {
-                                if (location != null){
-                                    LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                                if (location != null) {
+                                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                                     MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Current Location!");
                                     googleMap.addMarker(markerOptions);
-                                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-                                }
-                                else {
-                                    Toast.makeText(MapsActivity.this,"Please on your Location App Permissions", Toast.LENGTH_LONG).show();
+                                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                                } else {
+                                    Toast.makeText(MapsActivity.this, "Please turn on your Location App Permissions", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -71,9 +71,13 @@ public class MapsActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Callback method that gets called when the user responds to the permissions dialog
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.i("TAG", "onRequestPermissionsResults() ran");
         if (requestCode == this.requestCode) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission is granted, start using the location
@@ -81,6 +85,7 @@ public class MapsActivity extends AppCompatActivity {
             } else {
                 // Permission is denied, show an explanation or disable the functionality
                 // ...
+                Toast.makeText(MapsActivity.this, "HungryAlpacas can't find you...", Toast.LENGTH_LONG).show();
             }
         }
     }
