@@ -31,15 +31,15 @@ public class HomeActivity extends AppCompatActivity {
         if ((userdir.listFiles().length) == 0) {
             try {
                 DefaultUser user = new DefaultUser();
-                File defaultuser = new File(userdir, "default" + ".json");
-                if (defaultuser.createNewFile()) {
+                File defaultuserwrite = new File(userdir, "default" + ".json");
+                if (defaultuserwrite.createNewFile()) {
                     String jsonout = gson.toJson(user);
-                    FileUtils.writeStringToFile(defaultuser, jsonout, "utf-8");
+                    FileUtils.writeStringToFile(defaultuserwrite, jsonout, "utf-8");
                     Log.i("File", "Default User created.");
 
                     //test user
                     try {
-                        String jsonin = FileUtils.readFileToString(defaultuser, "utf-8");
+                        String jsonin = FileUtils.readFileToString(defaultuserwrite, "utf-8");
                         Log.d("File", "Default User Test: " + jsonin);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
@@ -54,13 +54,13 @@ public class HomeActivity extends AppCompatActivity {
         Log.d("File", "Userdir: " + Arrays.toString(userdir.listFiles()));
 
         //clear user dir
-        for (File user: userdir.listFiles()) {
-            user.delete();
-        }
-        Log.d("File", "All Users Cleared");
+//        for (File user: userdir.listFiles()) {
+//            user.delete();
+//        }
+//        Log.d("File", "All Users Cleared");
 
-        Button mapsButton = findViewById(R.id.homeMapsButton);
-        mapsButton.setOnClickListener(new View.OnClickListener() {
+        Button homeMapsButton = findViewById(R.id.homeMapsButton);
+        homeMapsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent homeToMaps = new Intent(view.getContext(), MapsActivity.class);
@@ -68,5 +68,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        Button homeUsersButton = findViewById(R.id.homeUsersButton);
+        homeUsersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent homeToUsers = new Intent(view.getContext(), UsersActivity.class);
+                startActivity(homeToUsers);
+            }
+        });
     }
 }

@@ -12,26 +12,26 @@
         android:theme="@style/Theme.HungryAlpacas"
         tools:targetApi="31">
         <activity
+            android:name=".UsersActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true"
             android:label="@string/homeActivityTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MapsActivity"
             android:exported="false"
-            android:label="@string/mapsActivityTitle">
-        </activity>
-
+            android:label="@string/mapsActivityTitle"></activity>
         <!-- TODO: HIDE THIS! -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDpbgKm529KrOdGdj8VXsg2iXzxu32osCQ" />
-
     </application>
 
 </manifest>
