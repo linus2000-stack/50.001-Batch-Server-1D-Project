@@ -5,4 +5,9 @@
 
     <string name="homeMapsButton">Where am I?</string>
     <string name="homeUsersButton">Users</string>
+
+    <string name="newNameText">Name of New Profile</string>
+    <string name="newNameInput">Name</string>
+    <string name="newUsersButtonConfirm">Confirm</string>
+    <string name="newUsersButtonCancel">Cancel</string>
 </resources>

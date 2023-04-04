@@ -12,6 +12,9 @@
         android:theme="@style/Theme.HungryAlpacas"
         tools:targetApi="31">
         <activity
+            android:name=".NewActivity"
+            android:exported="false" />
+        <activity
             android:name=".UsersActivity"
             android:exported="false" />
         <activity
@@ -27,11 +30,11 @@
         <activity
             android:name=".MapsActivity"
             android:exported="false"
-            android:label="@string/mapsActivityTitle"></activity>
-        <!-- TODO: HIDE THIS! -->
+            android:label="@string/mapsActivityTitle" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDpbgKm529KrOdGdj8VXsg2iXzxu32osCQ" />
+            android:value="${MAPS_API_KEY}" />
     </application>
 
 </manifest>

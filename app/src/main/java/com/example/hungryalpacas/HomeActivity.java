@@ -28,10 +28,17 @@ public class HomeActivity extends AppCompatActivity {
         Gson gson = new Gson();
         File userdir = new File(this.getFilesDir(), "users");
         userdir.mkdir();
+
+        //clear user dir
+//        for (File user: userdir.listFiles()) {
+//            user.delete();
+//        }
+//        Log.d("File", "All Users Cleared");
+
         if ((userdir.listFiles().length) == 0) {
             try {
                 DefaultUser user = new DefaultUser();
-                File defaultuserwrite = new File(userdir, "default" + ".json");
+                File defaultuserwrite = new File(userdir, user.getName() + ".json");
                 if (defaultuserwrite.createNewFile()) {
                     String jsonout = gson.toJson(user);
                     FileUtils.writeStringToFile(defaultuserwrite, jsonout, "utf-8");
@@ -51,13 +58,7 @@ public class HomeActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
-        Log.d("File", "Userdir: " + Arrays.toString(userdir.listFiles()));
-
-        //clear user dir
-//        for (File user: userdir.listFiles()) {
-//            user.delete();
-//        }
-//        Log.d("File", "All Users Cleared");
+        Log.d("File", "Userdir files: " + Arrays.toString(userdir.listFiles()));
 
         Button homeMapsButton = findViewById(R.id.homeMapsButton);
         homeMapsButton.setOnClickListener(new View.OnClickListener() {
