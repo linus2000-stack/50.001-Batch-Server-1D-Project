@@ -13,9 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,18 +23,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.PlaceLikelihood;
-import com.google.android.libraries.places.api.model.TypeFilter;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 public class MapsActivity extends AppCompatActivity {
     SupportMapFragment supportMapFragment;
@@ -83,56 +71,10 @@ public class MapsActivity extends AppCompatActivity {
                                     googleMap.addMarker(markerOptions);
                                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
-                                    // Updates global variable of the user location
-                                    userLocation = location;
+                                    // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
+                                    String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
+                                    new GetNearbyPlacesTask(googleMap,latLngString,location).execute();
 
-                                    // Defines the place fields to be returned
-                                    List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS,Place.Field.TYPES);
-
-
-
-                                    FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
-                                    if (ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                                        // TODO: Consider calling
-                                        //    ActivityCompat#requestPermissions
-                                        // here to request the missing permissions, and then overriding
-                                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                        //                                          int[] grantResults)
-                                        // to handle the case where the user grants the permission. See the documentation
-                                        // for ActivityCompat#requestPermissions for more details.
-                                        return;
-                                    }
-                                    Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
-
-                                    placeResponse.addOnCompleteListener(task -> {
-                                        if (task.isSuccessful()) {
-                                            FindCurrentPlaceResponse response = task.getResult();
-                                            for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                                                Log.i("TAG" , "This ran");
-                                                Place place = placeLikelihood.getPlace();
-                                                LatLng placeLatLng = place.getLatLng();
-
-                                                // filter by types
-                                                List<Place.Type> placeTypes = place.getTypes();
-                                                if (placeTypes.contains(Place.Type.MEAL_DELIVERY) ||
-                                                        placeTypes.contains(Place.Type.CAFE) ||
-                                                        placeTypes.contains(Place.Type.MEAL_TAKEAWAY) ||
-                                                        placeTypes.contains(Place.Type.BAR) ||
-                                                        placeTypes.contains(Place.Type.RESTAURANT) ||
-                                                        // school is not needed but used to debug
-                                                        placeTypes.contains(Place.Type.SCHOOL)) {
-                                                    MarkerOptions placesMarkerOptions = new MarkerOptions()
-                                                            .position(placeLatLng)
-                                                            .title(place.getName())
-                                                            .snippet(place.getAddress());
-                                                    googleMap.addMarker(placesMarkerOptions);
-                                                }
-                                            }
-                                        } else{
-                                            ApiException exception = (ApiException) task.getException();
-                                            Log.e("MapsActivity", "Place not found: " + exception.getMessage());
-                                        }
-                                    });
                                 } else {
                                     Toast.makeText(MapsActivity.this, "Please turn on your Location App Permissions", Toast.LENGTH_LONG).show();
                                 }
@@ -141,9 +83,6 @@ public class MapsActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-
 
 
 
