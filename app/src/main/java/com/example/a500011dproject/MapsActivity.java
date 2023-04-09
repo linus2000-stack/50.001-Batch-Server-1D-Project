@@ -77,8 +77,14 @@ public class MapsActivity extends AppCompatActivity {
                                     int radius = intent.getIntExtra(MainActivity.RADIUS , 1500);
                                     System.out.println(radius); // this keeps logging 0 for some reason, even with the default value above
                                     String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
-                                    new GetNearbyPlacesTask(googleMap,latLngString,location).execute(); // should use constructor with radius to pass data
+                                    GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(googleMap,latLngString,location,MapsActivity.this); // should use constructor with radius to pass data
+                                    getNearbyPlacesTask.execute();
 
+                                    // Pass the photo reference to the RestaurantActivity class
+                                    String photoReference =  getNearbyPlacesTask.getPhotoReference();
+                                    Intent mapsToRestaurant = new Intent(MapsActivity.this, RestaurantActivity.class);
+                                    mapsToRestaurant.putExtra("photo_reference", photoReference);
+                                    startActivity(mapsToRestaurant);
                                 } else {
                                     Toast.makeText(MapsActivity.this, "HungryAlpacas requires your Location App Permissions", Toast.LENGTH_LONG).show();
                                 }
@@ -87,6 +93,7 @@ public class MapsActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
 
 
