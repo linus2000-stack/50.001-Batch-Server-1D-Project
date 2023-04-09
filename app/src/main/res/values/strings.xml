@@ -21,4 +21,10 @@
     <string name="map_button_menu">Main Menu</string>
     <string name="title_activity_maps">MapsActivity</string>
 
+    <string name="set_distance">Set distance</string>
+
+    <string name="near">Near</string>
+    <string name="normal">Normal</string>
+    <string name="far">Far</string>
+
 </resources>

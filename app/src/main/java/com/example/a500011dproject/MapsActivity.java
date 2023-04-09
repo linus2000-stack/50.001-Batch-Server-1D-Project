@@ -2,6 +2,7 @@ package com.example.a500011dproject;
 
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -72,11 +73,14 @@ public class MapsActivity extends AppCompatActivity {
                                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
                                     // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
+                                    Intent intent = getIntent();
+                                    int radius = intent.getIntExtra(MainActivity.RADIUS , 1500);
+                                    System.out.println(radius); // this keeps logging 0 for some reason, even with the default value above
                                     String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
-                                    new GetNearbyPlacesTask(googleMap,latLngString,location).execute();
+                                    new GetNearbyPlacesTask(googleMap,latLngString,location).execute(); // should use constructor with radius to pass data
 
                                 } else {
-                                    Toast.makeText(MapsActivity.this, "Please turn on your Location App Permissions", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(MapsActivity.this, "HungryAlpacas requires your Location App Permissions", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -100,7 +104,7 @@ public class MapsActivity extends AppCompatActivity {
             } else {
                 // Permission is denied, show an explanation or disable the functionality
                 // ...
-                Toast.makeText(MapsActivity.this, "HungryAlpacas can't find you...", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapsActivity.this, "HungryAlpacas has no permission to find you...", Toast.LENGTH_LONG).show();
             }
         }
     }

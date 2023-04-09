@@ -1,7 +1,9 @@
 package com.example.a500011dproject;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -25,6 +27,13 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
     GoogleMap googleMap;
     String latLngString;
     Location userLocation;
+    int radius=1500;
+    public GetNearbyPlacesTask(GoogleMap googleMap, String latLngString,Location userLocation,int radius) {
+        this.googleMap = googleMap;
+        this.latLngString = latLngString;
+        this.userLocation = userLocation;
+        this.radius = radius;
+    }
     public GetNearbyPlacesTask(GoogleMap googleMap, String latLngString,Location userLocation) {
         this.googleMap = googleMap;
         this.latLngString = latLngString;
@@ -34,7 +43,6 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... voids) {
         OkHttpClient client = new OkHttpClient();
-        int radius = 1500; // Replace with your desired search radius in meters
         String apiKey = BuildConfig.MAPS_API_KEY; // Replace with your Google Maps API key
         String types = "restaurant|cafe|meal_delivery|meal_takeway|bakery";
 
@@ -64,6 +72,9 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
         try {
             JSONObject jsonObject = new JSONObject(responseBody);
             JSONArray results = jsonObject.getJSONArray("results");
+
+            // Check for json response within the logcat
+            Log.d("TAG", responseBody);
 
             // Change location markers to desired colour
             BitmapDescriptor markerIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
