@@ -17,7 +17,7 @@ public class RandomActivity {
     public static void main(String[] args) {
         // Hardcoded arraylist , will replace with user's restaurants
         ArrayList<String> RestaurantArray = new ArrayList<String>();
-        RestaurantArray.add("Macdonalds");
+        RestaurantArray.add("Mcdonalds");
         RestaurantArray.add("KFC");
         RestaurantArray.add("Haidilao");
         System.out.println(RestaurantArray);
