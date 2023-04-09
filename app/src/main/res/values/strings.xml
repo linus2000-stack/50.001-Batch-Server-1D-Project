@@ -4,7 +4,7 @@
     <!-- Strings used for fragments for navigation -->
 
     <string name="menu_fragment_label">Main Menu</string>
-    <string name="menu_button_map">Where am I?</string>
+    <string name="menu_button_random">Random Restaurant</string>
     <string name="menu_button_list">Food Near Me</string>
     <string name="menu_button_profiles">My Profiles</string>
     <string name="welcome">Welcome *User_Placeholder*!</string>

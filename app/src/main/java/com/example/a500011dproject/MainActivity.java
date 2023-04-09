@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,8 +39,16 @@ public class MainActivity extends AppCompatActivity {
         // Add your code to handle button2 click event here
     }
 
-    public void whereAmIButton(View view) {
+    public void randomButton(View view) {
         // Add your code to handle button3 click event here
+        Button button3 = (Button) findViewById(R.id.menu_button_random);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("button3", "user tapped 3rd button");
+
+            }
+        });
     }
 
     @Override
