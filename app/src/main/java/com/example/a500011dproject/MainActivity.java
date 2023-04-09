@@ -42,13 +42,16 @@ public class MainActivity extends AppCompatActivity {
     public void randomButton(View view) {
         // Add your code to handle button3 click event here
         Button button3 = (Button) findViewById(R.id.menu_button_random);
+        Intent toRandomise = new Intent(MainActivity.this, RandomActivity.class);
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("button3", "user tapped 3rd button");
-
+                //TODO Show a restaurant after passing through randomiser
+                //String chosen_restaurant =
             }
         });
+        startActivity(toRandomise);
     }
 
     @Override

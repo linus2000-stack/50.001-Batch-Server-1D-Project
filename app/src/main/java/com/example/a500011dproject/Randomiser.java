@@ -3,7 +3,7 @@ package com.example.a500011dproject;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class RandomActivity {
+public class Randomiser {
 
     public String getRandomRestaurant(ArrayList<String> list) {
         //create random object
@@ -22,7 +22,7 @@ public class RandomActivity {
         RestaurantArray.add("Haidilao");
         System.out.println(RestaurantArray);
         //get the randomly selected restaurant
-        RandomActivity chosenRestaurant = new RandomActivity();
+        Randomiser chosenRestaurant = new Randomiser();
         System.out.println(chosenRestaurant.getRandomRestaurant(RestaurantArray));
         //return chosenRestaurant.getRandomRestaurant(RestaurantArray);
     }
