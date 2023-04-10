@@ -30,6 +30,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends AppCompatActivity {
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient fusedLocationClient;
@@ -86,6 +88,7 @@ public class MapsActivity extends AppCompatActivity {
                                     String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
                                     GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(googleMap,latLngString,location,MapsActivity.this); // should use constructor with radius to pass data
                                     getNearbyPlacesTask.execute();
+                                    ArrayList<Restaurant> ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
 
                                     // Pass the photo reference to the RestaurantActivity class
                                     String photoReference =  getNearbyPlacesTask.getPhotoReference();
@@ -99,6 +102,7 @@ public class MapsActivity extends AppCompatActivity {
                         });
                     }
                 });
+
     }
 
 

@@ -33,10 +33,10 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
     int radius=1500;
     private String photoReference;
     private Context context;
-    public ArrayList<Restaurant> ListOfRestaurants = new ArrayList<>();
+    private ArrayList<Restaurant> ListOfRestaurants = new ArrayList<>();
 
     public ArrayList<Restaurant> getListOfRestaurants(){
-        return ListOfRestaurants
+        return ListOfRestaurants;
     }
 
 
@@ -110,8 +110,7 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
                 //Add new Restaurant to ListOfRestaurant
                 //TODO Fix the naming of restaurant
                 Restaurant restaurant = new Restaurant(name, address, placeId, "imageurl", "phone number", "rating");
-                ListOfRestaurants.add(restaurant
-                );
+                ListOfRestaurants.add(restaurant);
 
                 // Get the photos of the restaurant using the Place ID
                 OkHttpClient client = new OkHttpClient();
