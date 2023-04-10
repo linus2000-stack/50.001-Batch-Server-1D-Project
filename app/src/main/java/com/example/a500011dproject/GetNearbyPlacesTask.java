@@ -108,9 +108,10 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
                 String address = result.getString("vicinity");
                 String placeId = result.getString("place_id");
                 //Add new Restaurant to ListOfRestaurant
-                //TODO Fix the nameing "name1"
-                Restaurant name1 = new Restaurant(name, address, placeId, "imageurl", "phone number", "rating");
-                ListOfRestaurants.add(name1);
+                //TODO Fix the naming of restaurant
+                Restaurant restaurant = new Restaurant(name, address, placeId, "imageurl", "phone number", "rating");
+                ListOfRestaurants.add(restaurant
+                );
 
                 // Get the photos of the restaurant using the Place ID
                 OkHttpClient client = new OkHttpClient();
