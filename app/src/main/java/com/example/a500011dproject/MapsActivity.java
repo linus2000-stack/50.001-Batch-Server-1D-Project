@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -83,18 +84,13 @@ public class MapsActivity extends AppCompatActivity {
 
                                     // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
                                     Intent intent = getIntent();
-                                    int radius = intent.getIntExtra(MainActivity.RADIUS , 1500);
-                                    System.out.println(radius); // this keeps logging 0 for some reason, even with the default value above
+                                    int radius = intent.getIntExtra(MainActivity.RADIUS, 1500);
+                                    Log.d("RADIUS", Integer.toString(radius)); // this keeps logging 0 for some reason, even with the default value above
                                     String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
-                                    GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(googleMap,latLngString,location,MapsActivity.this); // should use constructor with radius to pass data
+                                    GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(googleMap, latLngString, location, MapsActivity.this); // should use constructor with radius to pass data
                                     getNearbyPlacesTask.execute();
                                     ArrayList<Restaurant> ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
 
-                                    // Pass the photo reference to the RestaurantActivity class
-                                    String photoReference =  getNearbyPlacesTask.getPhotoReference();
-                                    Intent mapsToRestaurant = new Intent(MapsActivity.this, Restaurant.class);
-                                    mapsToRestaurant.putExtra("photo_reference", photoReference);
-                                    startActivity(mapsToRestaurant);
                                 } else {
                                     Toast.makeText(MapsActivity.this, "HungryAlpacas requires your Location App Permissions", Toast.LENGTH_LONG).show();
                                 }
@@ -105,9 +101,9 @@ public class MapsActivity extends AppCompatActivity {
 
     }
 
-
-
-
+    public void randomButton (View view){
+        Intent toRandomiser = new Intent(MapsActivity.this,RandomActivity.class);
+    }
     /**
      * Callback method that gets called when the user responds to the permissions dialog
      */
