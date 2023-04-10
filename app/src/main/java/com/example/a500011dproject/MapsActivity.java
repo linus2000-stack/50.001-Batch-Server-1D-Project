@@ -7,11 +7,14 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -39,6 +42,10 @@ public class MapsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Nearby Restaurants");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         String apiKey = BuildConfig.MAPS_API_KEY;
@@ -82,7 +89,7 @@ public class MapsActivity extends AppCompatActivity {
 
                                     // Pass the photo reference to the RestaurantActivity class
                                     String photoReference =  getNearbyPlacesTask.getPhotoReference();
-                                    Intent mapsToRestaurant = new Intent(MapsActivity.this, RestaurantActivity.class);
+                                    Intent mapsToRestaurant = new Intent(MapsActivity.this, Restaurant.class);
                                     mapsToRestaurant.putExtra("photo_reference", photoReference);
                                     startActivity(mapsToRestaurant);
                                 } else {
@@ -115,4 +122,30 @@ public class MapsActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override // May not work
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Log.d("BACK","Back from main");
+                this.finish(); // destroys current activity (CHANGE)
+                return true;
+            /*case R.id.near:       //implement variables from MAIN
+                Log.d("set","NEAR");
+                radius = 500;
+            case R.id.normal:
+                radius = 1000;
+            case R.id.far:
+                radius = 1500;*/
+            }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
