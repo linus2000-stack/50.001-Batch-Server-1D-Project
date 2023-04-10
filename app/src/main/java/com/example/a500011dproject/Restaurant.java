@@ -35,7 +35,7 @@ public class Restaurant {
         return imageUrl;
     }
 
-    public String getPhoneNumber() {
+    public String getPhoneNumber() { return phoneNumber;
     }
 
     public String getRating() {
