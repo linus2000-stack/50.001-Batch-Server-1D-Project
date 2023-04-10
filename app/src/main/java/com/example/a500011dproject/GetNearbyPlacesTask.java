@@ -36,7 +36,7 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
     public ArrayList<Restaurant> ListOfRestaurants = new ArrayList<>();
 
     public ArrayList<Restaurant> getListOfRestaurants(){
-        return ListOfRestaurant;
+        return ListOfRestaurants
     }
 
 
