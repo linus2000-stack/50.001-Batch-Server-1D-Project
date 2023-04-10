@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,11 @@ public class MapsActivity extends AppCompatActivity {
     int requestCode = 100;
     Location userLocation;
     GoogleMap googleMap;
+
+    public ArrayList<Restaurant> ListOfRestaurants = new ArrayList<Restaurant>();
+    public Restaurant chosenRestaurant;
+
+    Button randomButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,7 +95,9 @@ public class MapsActivity extends AppCompatActivity {
                                     String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
                                     GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(googleMap, latLngString, location, MapsActivity.this); // should use constructor with radius to pass data
                                     getNearbyPlacesTask.execute();
-                                    ArrayList<Restaurant> ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
+                                    ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
+
+                                    randomButton = (Button) findViewById(R.id.randomButton);
 
                                 } else {
                                     Toast.makeText(MapsActivity.this, "HungryAlpacas requires your Location App Permissions", Toast.LENGTH_LONG).show();
@@ -102,7 +110,13 @@ public class MapsActivity extends AppCompatActivity {
     }
 
     public void randomButton (View view){
-        Intent toRandomiser = new Intent(MapsActivity.this,RandomActivity.class);
+        Randomiser randomiser = new Randomiser(ListOfRestaurants);
+        chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
+        Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
+        Log.d("check intent", "intent from maps to restuarant");
+        toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
+        startActivity(toRandomise);
+
     }
     /**
      * Callback method that gets called when the user responds to the permissions dialog

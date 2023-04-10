@@ -108,43 +108,42 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
                 String address = result.getString("vicinity");
                 String placeId = result.getString("place_id");
                 //Add new Restaurant to ListOfRestaurant
-                //TODO Fix the naming of restaurant
                 Restaurant restaurant = new Restaurant(name, address, placeId, "imageurl", "phone number", "rating");
                 ListOfRestaurants.add(restaurant);
 
-                // Get the photos of the restaurant using the Place ID
-                OkHttpClient client = new OkHttpClient();
-                String apiKey = BuildConfig.MAPS_API_KEY; // Replace with your Google Maps API key
+//                // Get the photos of the restaurant using the Place ID
+//                OkHttpClient client = new OkHttpClient();
+//                String apiKey = BuildConfig.MAPS_API_KEY; // Replace with your Google Maps API key
+//
+//                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/details/json").newBuilder();
+//                urlBuilder.addQueryParameter("placeid", placeId);
+//                urlBuilder.addQueryParameter("fields", "photos");
+//                urlBuilder.addQueryParameter("key", apiKey);
+//
+//                String url = urlBuilder.build().toString();
+//                Request request = new Request.Builder().url(url).build();
+//
+//                try (Response response = client.newCall(request).execute()) {
+//                    String responseBodyDetails = response.body().string();
+//                    JSONObject jsonObjectDetails = new JSONObject(responseBodyDetails);
+//                    JSONObject resultDetails = jsonObjectDetails.getJSONObject("result");
+//                    JSONArray photosArray = resultDetails.getJSONArray("photos");
 
-                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/details/json").newBuilder();
-                urlBuilder.addQueryParameter("placeid", placeId);
-                urlBuilder.addQueryParameter("fields", "photos");
-                urlBuilder.addQueryParameter("key", apiKey);
-
-                String url = urlBuilder.build().toString();
-                Request request = new Request.Builder().url(url).build();
-
-                try (Response response = client.newCall(request).execute()) {
-                    String responseBodyDetails = response.body().string();
-                    JSONObject jsonObjectDetails = new JSONObject(responseBodyDetails);
-                    JSONObject resultDetails = jsonObjectDetails.getJSONObject("result");
-                    JSONArray photosArray = resultDetails.getJSONArray("photos");
-
-                    // Get the first photo of the restaurant and set it as the marker icon
-                    if (photosArray.length() > 0) {
-                        JSONObject photoObject = photosArray.getJSONObject(0);
-                        String photoReference = photoObject.getString("photo_reference");
-                        this.photoReference = photoReference;
-                        BitmapDescriptor photoIcon = getPhotoIcon(photoReference);
-                        if (photoIcon != null) {
-                            markerIcon = photoIcon;
-                        }
-
-
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                    // Get the first photo of the restaurant and set it as the marker icon
+//                    if (photosArray.length() > 0) {
+//                        JSONObject photoObject = photosArray.getJSONObject(0);
+//                        String photoReference = photoObject.getString("photo_reference");
+//                        this.photoReference = photoReference;
+//                        BitmapDescriptor photoIcon = getPhotoIcon(photoReference);
+//                        if (photoIcon != null) {
+//                            markerIcon = photoIcon;
+//                        }
+//
+//
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
                 MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(name).snippet(address).icon(markerIcon);
                 googleMap.addMarker(markerOptions);

@@ -122,10 +122,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
                 android:text="Visit Website"
-                 />
+                />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/restaurant_directions_button"
                 style="?attr/materialButtonOutlinedStyle"
                 android:textColor="@color/blue"
                 app:strokeColor="@color/blue"
