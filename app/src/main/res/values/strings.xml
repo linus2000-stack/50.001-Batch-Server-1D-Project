@@ -12,6 +12,7 @@
 
     <string name="profiles_fragment_label">Profiles</string>
     <string name="profiles_button_menu">Main Menu</string>
+    <string name="profiles_button">Confirm</string>
 
 
     <string name="list_fragment_label">Restaurants</string>
@@ -26,5 +27,16 @@
     <string name="near">Near</string>
     <string name="normal">Normal</string>
     <string name="far">Far</string>
+
+    <string name="menu_food_alpacas">FOOD\nALPACAS</string>
+    <string name="menu_detailed_restaurant_title">Restaurants </string>
+
+    <string name="restaurant_list_botton">Confirm</string>
+    <string name="restaurant_list_label">Restaurants</string>
+
+    <string name="restaurant_details_label">Restaurant Details</string>
+    <string name="restaurant_details_button">Confirm</string>
+
+    <string name="block_list_label">Block List</string>
 
 </resources>

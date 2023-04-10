@@ -1,10 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/google_map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MapsActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsActivity" />
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_yellow"
+        app:popupTheme="@style/Theme.500011DProject.PopupOverlay"
+        app:menu="@menu/menu_main"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik_mono_one"
+        android:text="@string/map_fragment_label"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar" />
+
+    <ImageButton
+        android:id="@+id/map_button_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@android:color/transparent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        map:layout_constraintBottom_toBottomOf="@id/toolbar"
+        android:contentDescription="back to menu"
+        app:srcCompat="@drawable/ic_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="@id/map"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        >
+
+
+        <fragment
+
+            android:id="@+id/google_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 

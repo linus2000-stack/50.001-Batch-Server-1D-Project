@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_yellow"
+        app:popupTheme="@style/Theme.500011DProject.PopupOverlay"
+        app:menu="@menu/menu_main"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/profile_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik_mono_one"
+        android:text="@string/profiles_fragment_label"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+
+        />
+
+    <ImageButton
+        android:id="@+id/profile_button_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+
+        android:background="@android:color/transparent"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        android:contentDescription="back to menu"
+        app:srcCompat="@drawable/ic_back" />
+
+
+
+        <TextView
+            android:id="@+id/profile_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:background="@color/grey"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="30dp"
+            />
+
+
+        <Button
+            android:id="@+id/profile_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/profiles_button"
+            android:fontFamily="@font/rubik_mono_one"
+            style="?attr/materialButtonOutlinedStyle"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginBottom="30dp"
+            app:strokeColor="@color/blue"
+            app:strokeWidth="2dp"
+            app:cornerRadius="10dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
