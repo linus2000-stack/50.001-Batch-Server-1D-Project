@@ -44,5 +44,9 @@
 
     <string name="blocklistSwitch">BlockList Activated?</string>
 
+    <string name="new_name_text">Name of New Profile</string>
+    <string name="new_name_input">Name</string>
+    <string name="new_confirm">Confirm</string>
+    <string name="new_cancel">Cancel</string>
 
 </resources>

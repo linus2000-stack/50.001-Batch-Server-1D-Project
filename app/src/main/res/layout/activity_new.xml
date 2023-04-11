@@ -7,52 +7,52 @@
     tools:context=".NewActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/newNameInput"
+        android:id="@+id/new_name_input"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="590dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newNameText">
+        app:layout_constraintTop_toBottomOf="@+id/new_name_text">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/newNameEditText"
+            android:id="@+id/new_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/newNameInput" />
+            android:hint="@string/new_name_input" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/newNameText"
+        android:id="@+id/new_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/newNameText"
+        android:text="@string/new_name_text"
         android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/newNameInput"
+        app:layout_constraintBottom_toTopOf="@+id/new_name_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/newUsersButtonConfirm"
+        android:id="@+id/new_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/newUsersButtonConfirm"
+        android:text="@string/new_confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/newUsersButtonCancel"
+        app:layout_constraintStart_toEndOf="@+id/new_cancel"
         app:layout_constraintVertical_bias="0.95" />
 
     <Button
-        android:id="@+id/newUsersButtonCancel"
+        android:id="@+id/new_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/newUsersButtonCancel"
+        android:text="@string/new_cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/newUsersButtonConfirm"
+        app:layout_constraintEnd_toStartOf="@+id/new_confirm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95" />
