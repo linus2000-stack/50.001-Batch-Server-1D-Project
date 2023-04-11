@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import java.util.Date;
 import java.util.HashMap;
 
-public class User implements Parcelable {
+public class User implements Parcelable, Comparable<User> {
     private String name;
     public HashMap<Date, String> block;
 
@@ -47,5 +47,10 @@ public class User implements Parcelable {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int compareTo(User u) {
+        return this.name.compareTo(u.name);
     }
 }

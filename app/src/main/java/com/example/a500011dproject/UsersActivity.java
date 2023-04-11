@@ -21,6 +21,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class UsersActivity extends AppCompatActivity {
 
@@ -52,6 +53,7 @@ public class UsersActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
+        Collections.sort(arrUsers);
         Log.d("Users", arrUsers.toString());
 
         RecyclerView rvUsers = (RecyclerView) findViewById(R.id.users_list);
