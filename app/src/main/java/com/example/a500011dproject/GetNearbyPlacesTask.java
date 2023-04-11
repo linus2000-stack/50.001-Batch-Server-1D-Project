@@ -39,7 +39,6 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
         return ListOfRestaurants;
     }
 
-
     public String getPhotoReference() {
         return photoReference;
     }
@@ -107,43 +106,18 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
                 String name = result.getString("name");
                 String address = result.getString("vicinity");
                 String placeId = result.getString("place_id");
+
+                // Getting photo reference (might be the reason for throwing any error) - need this to work get photos to work in activity_restaurant.xml
+//                JSONObject photoObject = result.getJSONObject("photos");
+//                String photoReference = photoObject.getString("photo_reference");
+
+
+                String rating = result.getString("rating");
+
                 //Add new Restaurant to ListOfRestaurant
-                Restaurant restaurant = new Restaurant(name, address, placeId, "imageurl", "phone number", "rating");
+                Restaurant restaurant = new Restaurant(placeId,name,address,rating,photoReference);
+                System.out.println(restaurant.getName());
                 ListOfRestaurants.add(restaurant);
-
-//                // Get the photos of the restaurant using the Place ID
-//                OkHttpClient client = new OkHttpClient();
-//                String apiKey = BuildConfig.MAPS_API_KEY; // Replace with your Google Maps API key
-//
-//                HttpUrl.Builder urlBuilder = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/details/json").newBuilder();
-//                urlBuilder.addQueryParameter("placeid", placeId);
-//                urlBuilder.addQueryParameter("fields", "photos");
-//                urlBuilder.addQueryParameter("key", apiKey);
-//
-//                String url = urlBuilder.build().toString();
-//                Request request = new Request.Builder().url(url).build();
-//
-//                try (Response response = client.newCall(request).execute()) {
-//                    String responseBodyDetails = response.body().string();
-//                    JSONObject jsonObjectDetails = new JSONObject(responseBodyDetails);
-//                    JSONObject resultDetails = jsonObjectDetails.getJSONObject("result");
-//                    JSONArray photosArray = resultDetails.getJSONArray("photos");
-
-//                    // Get the first photo of the restaurant and set it as the marker icon
-//                    if (photosArray.length() > 0) {
-//                        JSONObject photoObject = photosArray.getJSONObject(0);
-//                        String photoReference = photoObject.getString("photo_reference");
-//                        this.photoReference = photoReference;
-//                        BitmapDescriptor photoIcon = getPhotoIcon(photoReference);
-//                        if (photoIcon != null) {
-//                            markerIcon = photoIcon;
-//                        }
-//
-//
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
 
                 MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(name).snippet(address).icon(markerIcon);
                 googleMap.addMarker(markerOptions);
@@ -152,12 +126,12 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
             e.printStackTrace();
         }
     }
-    private BitmapDescriptor getPhotoIcon(String photoReference) {
+    private String getImageURL(String photoReference) {
         OkHttpClient client = new OkHttpClient();
         String apiKey = BuildConfig.MAPS_API_KEY; // Replace with your Google Maps API key
         BitmapDescriptor icon = null;
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/photo").newBuilder();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/photo?").newBuilder();
         urlBuilder.addQueryParameter("maxheight", "100");
         urlBuilder.addQueryParameter("photoreference", photoReference);
         urlBuilder.addQueryParameter("key", apiKey);
@@ -165,14 +139,9 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder().url(url).build();
 
-        try (Response response = client.newCall(request).execute()) {
-            icon = BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeStream(response.body().byteStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return icon;
+        return url;
     }
+
 
 }
 
