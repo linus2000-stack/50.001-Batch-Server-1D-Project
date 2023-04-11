@@ -19,22 +19,21 @@ public class Restaurant implements Parcelable {
 
         }
     };
-    private String id;
+    private String placeId;
     private String name;
     private String address;
-    private String imageUrl;
-    private String phoneNumber;
+
     private String rating;
-    public Restaurant(String id, String name, String address, String imageUrl, String phoneNumber, String rating) {
-        this.id = id;
+    private String photoReference;
+    public Restaurant(String placeId, String name, String address ,String rating, String photoReference) {
+        this.placeId = placeId;
         this.name = name;
         this.address = address;
-        this.imageUrl = imageUrl;
-        this.phoneNumber = phoneNumber;
         this.rating = rating;
+        this.photoReference = photoReference;
     }
-    public String getId() {
-        return id;
+    public String getPlaceId() {
+        return placeId;
     }
     public String getName() {
         return name;
@@ -42,21 +41,19 @@ public class Restaurant implements Parcelable {
     public String getAddress() {
         return address;
     }
-    public String getImageUrl() {
-        return imageUrl;
-    }
-    public String getPhoneNumber() { return phoneNumber;
+    public String getPhotoReference() {
+        return photoReference;
     }
     public String getRating() {
         return rating;
     }
 
     public Restaurant(Parcel in){
-        this.id = in.readString();
+        this.placeId = in.readString();
+        this.name = in.readString();
         this.address = in.readString();
-        this.imageUrl = in.readString();
-        this.phoneNumber = in.readString();
         this.rating = in.readString();
+        this.photoReference = in.readString();
     }
 
     @Override
@@ -66,11 +63,11 @@ public class Restaurant implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel RestaurantActivity, int i) {
-        RestaurantActivity.writeArray(new Object[]{this.id,
+        RestaurantActivity.writeArray(new Object[]{this.placeId,
+                                                    this.name,
                                                     this.address,
-                                                    this.imageUrl,
-                                                    this.phoneNumber,
-                                                    this.rating});
+                                                    this.rating,
+                                                    this.photoReference});
     }
 
 }

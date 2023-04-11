@@ -109,9 +109,12 @@ public class MapsActivity extends AppCompatActivity {
 
     }
 
+
+
     public void randomButton (View view){
         Randomiser randomiser = new Randomiser(ListOfRestaurants);
         chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
+        Log.d("Restaurant" , chosenRestaurant.getAddress());
         Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
         Log.d("check intent", "intent from maps to restuarant");
         toRandomise.putExtra("chosenRestaurant", chosenRestaurant);

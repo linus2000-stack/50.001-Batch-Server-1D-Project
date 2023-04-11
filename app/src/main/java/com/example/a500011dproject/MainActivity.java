@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // Add your initialization code here
     }
 
-    // Define your onClick methods here
-
+    // Defining onClick methods
     public void foodNearMeButton(View view) {
         Intent toFoodNearMe = new Intent(MainActivity.this, MapsActivity.class);
         Log.i("radius" , Integer.toString(radius));
