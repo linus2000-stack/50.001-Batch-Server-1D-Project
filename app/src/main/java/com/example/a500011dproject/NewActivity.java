@@ -25,12 +25,12 @@ public class NewActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         File userdir = new File(this.getFilesDir(), "users");
-        Button newUsersButtonConfirm = findViewById(R.id.newUsersButtonConfirm);
+        Button newUsersButtonConfirm = findViewById(R.id.new_confirm);
         newUsersButtonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                EditText nameEdit = (EditText) findViewById(R.id.newNameEditText);
+                EditText nameEdit = (EditText) findViewById(R.id.new_name_edit_text);
                 String name = nameEdit.getText().toString();
 
                 if (name.length() != 0) {
@@ -49,7 +49,7 @@ public class NewActivity extends AppCompatActivity {
             }
         });
 
-        Button newUsersButtonCancel = findViewById(R.id.newUsersButtonCancel);
+        Button newUsersButtonCancel = findViewById(R.id.new_cancel);
         newUsersButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

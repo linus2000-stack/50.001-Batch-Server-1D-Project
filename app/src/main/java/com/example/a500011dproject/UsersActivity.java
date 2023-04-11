@@ -40,12 +40,12 @@ public class UsersActivity extends AppCompatActivity {
         }
         Log.d("Users", arrUsers.toString());
 
-        RecyclerView rvUsers = (RecyclerView) findViewById(R.id.usersList);
+        RecyclerView rvUsers = (RecyclerView) findViewById(R.id.users_list);
         UsersAdapter adapter = new UsersAdapter(arrUsers);
         rvUsers.setAdapter(adapter);
         rvUsers.setLayoutManager(new LinearLayoutManager(this));
 
-        FloatingActionButton usersNewButton = findViewById(R.id.usersNewButton);
+        FloatingActionButton usersNewButton = findViewById(R.id.users_new_button);
         usersNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

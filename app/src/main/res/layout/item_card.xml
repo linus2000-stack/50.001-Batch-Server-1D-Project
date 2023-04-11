@@ -9,7 +9,7 @@
     >
 
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/user_name"
         android:textSize="24dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
