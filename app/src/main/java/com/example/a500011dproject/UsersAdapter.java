@@ -13,6 +13,9 @@ import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
+    private List<User> users;
+    private OnClickListener onClickListener;
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView;
 
@@ -21,8 +24,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             nameTextView = (TextView) itemView.findViewById(R.id.user_name);
         }
     }
-
-    private List<User> users;
 
     public UsersAdapter(List<User> users) {
         this.users = users;
@@ -44,10 +45,27 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
         TextView textView = holder.nameTextView;
         textView.setText(user.getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onClickListener != null) {
+                    onClickListener.onClick(user);
+                }
+            }
+        });
     }
 
     public int getItemCount() {
         return users.size();
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    public interface OnClickListener {
+        void onClick(User user);
     }
 }
 

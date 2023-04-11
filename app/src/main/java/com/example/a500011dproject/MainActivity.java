@@ -26,7 +26,6 @@ import java.util.*;
 public class MainActivity extends AppCompatActivity {
     int radius;
     public final static String RADIUS = "RADIUS";
-    public final static String USER = "USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent toFoodNearMe = new Intent(MainActivity.this, MapsActivity.class);
                 Log.i("radius" , Integer.toString(radius));
                 toFoodNearMe.putExtra(RADIUS, radius);
-                toFoodNearMe.putExtra(USER, user);
+                toFoodNearMe.putExtra("USER", user);
                 startActivity(toFoodNearMe);
             }
         });
@@ -148,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent toProfiles = new Intent(MainActivity.this, UsersActivity.class);
-                toProfiles.putExtra(USER, user);
                 startActivity(toProfiles);
             }
         });
@@ -158,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent toBlocklist = new Intent(MainActivity.this, BlocklistActivity.class);
-                toBlocklist.putExtra(USER, user);
+                toBlocklist.putExtra("USER", user);
                 startActivity(toBlocklist);
             }
         });

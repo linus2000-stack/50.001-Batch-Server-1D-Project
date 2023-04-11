@@ -10,5 +10,7 @@ public class BlocklistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blocklist);
+        Bundle bundle = getIntent().getExtras();
+        User user = bundle.getParcelable("USER");
     }
 }
