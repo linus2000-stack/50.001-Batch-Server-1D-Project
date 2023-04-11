@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import org.apache.commons.io.FileUtils;
@@ -21,6 +22,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,15 +35,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //filesys init
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").create();
         File usersdir = new File(this.getFilesDir(), "users");
         File activedir = new File(this.getFilesDir(), "active.json");
         usersdir.mkdir();
 
         //clear user dir
-//        for (File user: userdir.listFiles()) {
+//        for (File user: usersdir.listFiles()) {
 //            user.delete();
 //        }
+//        activedir.delete();
 //        Log.d("File", "All Users Cleared");
 
         //check for default user
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").create();
 
         //get active user name
         String active;

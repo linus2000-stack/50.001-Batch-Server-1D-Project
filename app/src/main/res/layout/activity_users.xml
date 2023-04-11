@@ -31,6 +31,7 @@
 
     <TextView
         android:id="@+id/users_active"
+        android:textSize="24dp"
         android:layout_width="412dp"
         android:layout_height="50dp"
         android:text="@string/users_active"

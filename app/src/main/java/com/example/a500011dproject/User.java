@@ -3,12 +3,14 @@ package com.example.a500011dproject;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.Date;
 import java.util.HashMap;
 
 public class User implements Parcelable {
     private String name;
-    HashMap<Date, String> block;
+    public HashMap<Date, String> block;
 
     User(String name) {
         this.name = name;
@@ -17,16 +19,7 @@ public class User implements Parcelable {
 
     protected User(Parcel in) {
         name = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
+        block = (HashMap<Date, String>) in.readSerializable();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -41,12 +34,18 @@ public class User implements Parcelable {
         }
     };
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeSerializable(block);
+    }
+
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }

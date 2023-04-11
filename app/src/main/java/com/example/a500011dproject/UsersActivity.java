@@ -14,11 +14,13 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class UsersActivity extends AppCompatActivity {
@@ -28,7 +30,7 @@ public class UsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").create();
         File userdir = new File(this.getFilesDir(), "users");
         File activedir = new File(this.getFilesDir(), "active.json");
         File[] arrFiles = userdir.listFiles();

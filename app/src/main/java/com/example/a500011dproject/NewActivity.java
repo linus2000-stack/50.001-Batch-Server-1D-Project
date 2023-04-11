@@ -10,11 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 
 public class NewActivity extends AppCompatActivity {
 
@@ -23,7 +25,7 @@ public class NewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new);
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").create();
         File userdir = new File(this.getFilesDir(), "users");
         Button newUsersButtonConfirm = findViewById(R.id.new_confirm);
         newUsersButtonConfirm.setOnClickListener(new View.OnClickListener() {
