@@ -52,9 +52,7 @@ public class MapsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_maps);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Nearby Restaurants");
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         String apiKey = BuildConfig.MAPS_API_KEY;

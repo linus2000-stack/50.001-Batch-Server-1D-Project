@@ -44,7 +44,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/new_cancel"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.95"
+        android:fontFamily="@font/rubik_mono_one"
+        android:backgroundTint="@color/light_yellow"
+        android:textColor="@color/blue"
+        style="?attr/materialButtonOutlinedStyle"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="2dp"
+        app:cornerRadius="10dp"
+        />
 
     <Button
         android:id="@+id/new_cancel"
@@ -55,5 +63,11 @@
         app:layout_constraintEnd_toStartOf="@+id/new_confirm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.95"
+        android:fontFamily="@font/rubik_mono_one"
+        android:backgroundTint="@color/light_yellow"
+        android:textColor="@color/blue"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="2dp"
+        app:cornerRadius="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

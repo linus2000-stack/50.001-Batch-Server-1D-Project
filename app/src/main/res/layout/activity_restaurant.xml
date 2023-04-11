@@ -43,6 +43,7 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/rubik_mono_one"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,20 +113,24 @@
 
             <Button
                 android:id="@+id/restaurant_directions_button"
-                android:backgroundTint="@color/light_yellow"
+
                 style="?attr/materialButtonOutlinedStyle"
-                android:textColor="@color/black"
-                app:strokeColor="@color/yellow"
-                app:strokeWidth="2dp"
                 android:textSize="14sp"
-                app:cornerRadius="10dp"
                 android:layout_width="0dp"
-                android:layout_marginEnd="10dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="100dp"
                 android:layout_weight="1"
-                android:text="Directions" />
+                android:text="Directions"
+                android:fontFamily="@font/rubik_mono_one"
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+                app:strokeColor="@color/blue"
+                app:strokeWidth="2dp"
+                app:cornerRadius="10dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:backgroundTint="@color/light_yellow"
+                />
 
         </LinearLayout>
 
