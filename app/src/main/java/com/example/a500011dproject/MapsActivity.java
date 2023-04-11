@@ -74,8 +74,7 @@ public class MapsActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, requestCode);
             return;
         }
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     public void onSuccess(Location location) {
                         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                             @Override
@@ -88,7 +87,9 @@ public class MapsActivity extends AppCompatActivity {
 
                                     // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
                                     Intent intent = getIntent();
-                                    int radius = intent.getIntExtra(MainActivity.RADIUS, 1500);
+                                    Bundle bundle = getIntent().getExtras();
+                                    int radius = bundle.getInt(MainActivity.RADIUS, 1500);
+                                    User user = bundle.getParcelable("USER");
                                     Log.d("RADIUS", Integer.toString(radius)); // this keeps logging 0 for some reason, even with the default value above
                                     String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
                                     GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(googleMap, latLngString, location, MapsActivity.this); // should use constructor with radius to pass data
@@ -105,6 +106,7 @@ public class MapsActivity extends AppCompatActivity {
                                             Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
                                             Log.d("check intent", "intent from maps to restaurant");
                                             toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
+                                            toRandomise.putExtra("USER", user);
                                             startActivity(toRandomise);
                                         }
                                     });
@@ -116,7 +118,7 @@ public class MapsActivity extends AppCompatActivity {
                             }
                         });
                     }
-                });
+        });
 
     }
 

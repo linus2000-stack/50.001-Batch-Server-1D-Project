@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +17,15 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Text;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
 public class RestaurantActivity extends AppCompatActivity {
 
@@ -35,9 +44,13 @@ public class RestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
 
+        Gson gson = new GsonBuilder().setDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").create();
+        File usersdir = new File(this.getFilesDir(), "users");
+
         // Get the intent that started this activity and extract the restaurant object from it
-        Intent toRandomise = getIntent();
-        Restaurant chosenRestaurant = toRandomise.getParcelableExtra("chosenRestaurant");
+        Bundle bundle = getIntent().getExtras();
+        Restaurant chosenRestaurant = bundle.getParcelable("chosenRestaurant");
+        User user = bundle.getParcelable("USER");
 
         // Get chosenRestaurant's contents
         String restaurantPlaceId = chosenRestaurant.getPlaceId();
@@ -56,7 +69,6 @@ public class RestaurantActivity extends AppCompatActivity {
         restaurantRatingTextView.setText(restaurantRating);
         //missing photoReference
         Button directionsButton = findViewById(R.id.restaurant_directions_button);
-
 
         //NOT SURE IF WANNA DELETE (LMK?)
 //        ImageView restaurantImageView = findViewById(R.id.restaurant_image_view);
@@ -80,6 +92,17 @@ public class RestaurantActivity extends AppCompatActivity {
         directionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Date date = new Date();
+                File userdir = new File(usersdir, user.getName() + ".json");
+                user.block.put(date, restaurantName);
+                String jsonout = gson.toJson(user);
+                try {
+                    FileUtils.writeStringToFile(userdir, jsonout, "utf-8");
+                    Log.d("File", "User overwritten");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
                 //TODO: Open directions to the restaurant
                 Uri.Builder uriBuilder = new Uri.Builder();
                 uriBuilder.scheme("geo").opaquePart("0.0").appendQueryParameter("q", restaurantName);
