@@ -55,7 +55,6 @@ public class RestaurantActivity extends AppCompatActivity {
         TextView restaurantRatingTextView = findViewById(R.id.restaurant_rating_text_view);
         restaurantRatingTextView.setText(restaurantRating);
         //missing photoReference
-        Button restaurantWebsiteButton = findViewById(R.id.restaurant_website_button);
         Button directionsButton = findViewById(R.id.restaurant_directions_button);
 
 
@@ -76,12 +75,7 @@ public class RestaurantActivity extends AppCompatActivity {
         // My URL currently is a String - setImageResource is done with integer
 
         // Set the click listeners for the buttons did u
-        restaurantWebsiteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: Open the restaurant's website
-            }
-        });
+
 
         directionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
