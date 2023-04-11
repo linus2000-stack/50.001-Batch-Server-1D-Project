@@ -23,7 +23,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.near:       //implement variables from MAIN
+                        radius = 500;
+                    case R.id.normal:
+                        radius = 1000;
+                    case R.id.far:
+                        radius = 1500;
+                }
+                return false;
+            }
+        });
         // Add your initialization code here
     }
 
@@ -43,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         // Add your code to handle button3 click event here
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -63,5 +78,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
         }
+        */
     }
 
