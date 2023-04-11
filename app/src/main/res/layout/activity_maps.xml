@@ -68,11 +68,6 @@
 
         />
 
-<!--    <Button-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:On-->
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"

@@ -40,6 +40,12 @@
     <string name="restaurant_details_label">Restaurant Details</string>
     <string name="restaurant_details_button">Confirm</string>
 
+    <string name="restaurant_name_text_view">Restaurant Name</string>
+    <string name="restaurant_address_text_view">Address</string>
+    <string name="restaurant_phone_text_view">Phone</string>
+    <string name="restaurant_rating_text_view">Rating</string>
+    <string name="restaurant_directions_button">Directions</string>
+
     <string name="block_list_label">Block List</string>
 
     <string name="blocklistSwitch">BlockList Activated?</string>

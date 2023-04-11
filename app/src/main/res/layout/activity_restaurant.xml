@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Restaurant Name"
+            android:text="@string/restaurant_name_text_view"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Address"
+            android:text="@string/restaurant_address_text_view"
             android:textSize="16sp" />
 
         <TextView
@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Phone"
+            android:text="@string/restaurant_phone_text_view"
             android:textSize="16sp" />
 
         <TextView
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Rating"
+            android:text="@string/restaurant_rating_text_view"
             android:textSize="16sp" />
 
         <LinearLayout
@@ -113,14 +113,13 @@
 
             <Button
                 android:id="@+id/restaurant_directions_button"
-
                 style="?attr/materialButtonOutlinedStyle"
                 android:textSize="14sp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
                 android:layout_weight="1"
-                android:text="Directions"
+                android:text="@string/restaurant_directions_button"
                 android:fontFamily="@font/rubik_mono_one"
                 android:textAlignment="center"
                 android:textColor="@color/blue"
