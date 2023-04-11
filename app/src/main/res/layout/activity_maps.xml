@@ -58,6 +58,7 @@
         android:onClick="randomButton"
         android:text="@string/randomButton"
         android:layout_marginHorizontal="@dimen/places_autocomplete_vertical_dropdown"
+        android:layout_gravity="bottom|center"
         />
 
     <LinearLayout
