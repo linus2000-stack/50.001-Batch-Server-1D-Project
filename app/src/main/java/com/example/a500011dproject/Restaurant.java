@@ -59,11 +59,6 @@ public class Restaurant implements Parcelable {
     }
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-//        RestaurantActivity.writeArray(new Object[]{this.placeId,
-//                                                    this.name,
-//                                                    this.address,
-//                                                    this.rating,
-//                                                    this.photoReference});
         dest.writeString(placeId);
         dest.writeString(name);
         dest.writeString(address);
