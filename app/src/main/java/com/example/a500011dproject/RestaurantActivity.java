@@ -92,6 +92,7 @@ public class RestaurantActivity extends AppCompatActivity {
         directionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Adds restaurant to blocklist
                 Date date = new Date();
                 File userdir = new File(usersdir, user.getName() + ".json");
                 user.block.put(date, restaurantName);
@@ -103,12 +104,13 @@ public class RestaurantActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
 
-                //TODO: Open directions to the restaurant
+                //Opens directions to the restaurant in google maps
                 Uri.Builder uriBuilder = new Uri.Builder();
-                uriBuilder.scheme("geo").opaquePart("0.0").appendQueryParameter("q", restaurantName);
+                uriBuilder.scheme("geo").opaquePart("0.0").appendQueryParameter("q", restaurantAddress);
                 Uri uri = uriBuilder.build();
                 Toast.makeText(RestaurantActivity.this, uri.toString(), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(uri);
                 if (intent.resolveActivity(getPackageManager()) != null){
                     startActivity(intent);
                 }
