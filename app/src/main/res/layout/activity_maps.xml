@@ -32,7 +32,6 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar"
@@ -55,18 +54,26 @@
         android:id="@+id/randomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="randomButton"
+        android:layout_gravity="bottom"
+        android:fontFamily="@font/rubik_mono_one"
         android:text="@string/randomButton"
-        android:layout_marginHorizontal="@dimen/places_autocomplete_vertical_dropdown"
-        android:layout_gravity="bottom|center"
-        />
+        android:layout_marginHorizontal="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/map"
+        map:layout_constraintStart_toEndOf="@+id/linearLayout" />
+
+<!--    <Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:On-->
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="@id/map"
         android:layout_marginTop="80dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@id/map">
 
 
         <fragment
@@ -78,8 +85,6 @@
 
 
             />
-
-
 
 
     </LinearLayout>

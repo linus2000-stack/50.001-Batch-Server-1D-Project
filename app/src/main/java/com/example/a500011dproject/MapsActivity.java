@@ -97,7 +97,19 @@ public class MapsActivity extends AppCompatActivity {
                                     getNearbyPlacesTask.execute();
                                     ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
 
-                                    //randomButton = (Button) findViewById(R.id.randomButton);
+                                    Button randomButton = (Button) findViewById(R.id.randomButton);
+                                    randomButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Randomiser randomiser = new Randomiser(ListOfRestaurants);
+                                            chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
+                                            Log.d("Restaurant" , chosenRestaurant.getAddress());
+                                            Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
+                                            Log.d("check intent", "intent from maps to restaurant");
+                                            toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
+                                            startActivity(toRandomise);
+                                        }
+                                    });
 
 
                                 } else {
@@ -112,16 +124,16 @@ public class MapsActivity extends AppCompatActivity {
 
 
 
-    public void randomButton (View view){
-        Randomiser randomiser = new Randomiser(ListOfRestaurants);
-        chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
-        Log.d("Restaurant" , chosenRestaurant.getAddress());
-        Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
-        Log.d("check intent", "intent from maps to restaurant");
-        toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
-        startActivity(toRandomise);
-
-    }
+//    public void randomButton (View view){
+//        Randomiser randomiser = new Randomiser(ListOfRestaurants);
+//        chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
+//        Log.d("Restaurant" , chosenRestaurant.getAddress());
+//        Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
+//        Log.d("check intent", "intent from maps to restaurant");
+//        toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
+//        startActivity(toRandomise);
+//
+//    }
     /**
      * Callback method that gets called when the user responds to the permissions dialog
      */
