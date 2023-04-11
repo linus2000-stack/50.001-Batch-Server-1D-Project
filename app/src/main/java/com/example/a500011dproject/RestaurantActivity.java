@@ -108,6 +108,10 @@ public class RestaurantActivity extends AppCompatActivity {
                 uriBuilder.scheme("geo").opaquePart("0.0").appendQueryParameter("q", restaurantName);
                 Uri uri = uriBuilder.build();
                 Toast.makeText(RestaurantActivity.this, uri.toString(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                if (intent.resolveActivity(getPackageManager()) != null){
+                    startActivity(intent);
+                }
             }
 
 //            }
