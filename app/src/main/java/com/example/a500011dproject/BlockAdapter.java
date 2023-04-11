@@ -1,5 +1,6 @@
 package com.example.a500011dproject;
 
+import android.accessibilityservice.GestureDescription;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +16,8 @@ import java.util.HashMap;
 
 public class BlockAdapter extends RecyclerView.Adapter<BlockAdapter.ViewHolder> {
 
-    HashMap<Date, String> block;
-    private ArrayList<Date> dates;
-    private ArrayList<String> places;
+    ArrayList<String> places;
+    ArrayList<Date> dates;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView placeTextView;
@@ -30,14 +30,9 @@ public class BlockAdapter extends RecyclerView.Adapter<BlockAdapter.ViewHolder> 
         }
     }
 
-    public BlockAdapter(HashMap<Date, String> block) {
-        this.block = block;
-        Log.d("Blocklist loaded:", block.toString());
-        dates = new ArrayList<>(block.keySet());
-        places = new ArrayList<>();
-        for (Date date: dates) {
-            places.add(block.get(date));
-        }
+    public BlockAdapter(ArrayList<Date> dates, ArrayList<String> places) {
+        this.places = places;
+        this.dates = dates;
     }
 
     public BlockAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,6 +57,6 @@ public class BlockAdapter extends RecyclerView.Adapter<BlockAdapter.ViewHolder> 
     }
 
     public int getItemCount() {
-        return block.size();
+        return dates.size();
     }
 }
