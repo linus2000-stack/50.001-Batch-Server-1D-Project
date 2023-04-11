@@ -1,6 +1,5 @@
 package com.example.a500011dproject;
 
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -86,7 +85,6 @@ public class MapsActivity extends AppCompatActivity {
                                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
                                     // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
-                                    Intent intent = getIntent();
                                     Bundle bundle = getIntent().getExtras();
                                     int radius = bundle.getInt(MainActivity.RADIUS, 1500);
                                     User user = bundle.getParcelable("USER");
@@ -121,8 +119,6 @@ public class MapsActivity extends AppCompatActivity {
         });
 
     }
-
-
 
 //    public void randomButton (View view){
 //        Randomiser randomiser = new Randomiser(ListOfRestaurants);
