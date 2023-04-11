@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import java.util.*;
 public class MainActivity extends AppCompatActivity {
     int radius;
     public final static String RADIUS = "RADIUS";
+    public final static String USER = "USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         //filesys init
         Gson gson = new Gson();
-        File userdir = new File(this.getFilesDir(), "users");
-        userdir.mkdir();
+        File usersdir = new File(this.getFilesDir(), "users");
+        File activedir = new File(this.getFilesDir(), "active.json");
+        usersdir.mkdir();
 
         //clear user dir
 //        for (File user: userdir.listFiles()) {
@@ -42,18 +45,19 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //        Log.d("File", "All Users Cleared");
 
-        if ((userdir.listFiles().length) == 0) {
+        //check for default user
+        if ((usersdir.listFiles().length) == 0) {
             try {
                 DefaultUser user = new DefaultUser();
-                File defaultuserwrite = new File(userdir, user.getName() + ".json");
-                if (defaultuserwrite.createNewFile()) {
+                File userdir = new File(usersdir, user.getName() + ".json");
+                if (userdir.createNewFile()) {
                     String jsonout = gson.toJson(user);
-                    FileUtils.writeStringToFile(defaultuserwrite, jsonout, "utf-8");
+                    FileUtils.writeStringToFile(userdir, jsonout, "utf-8");
                     Log.i("File", "Default User created.");
 
                     //test user
                     try {
-                        String jsonin = FileUtils.readFileToString(defaultuserwrite, "utf-8");
+                        String jsonin = FileUtils.readFileToString(userdir, "utf-8");
                         Log.d("File", "Default User Test: " + jsonin);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
@@ -65,7 +69,18 @@ public class MainActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
-        Log.d("File", "Userdir files: " + Arrays.toString(userdir.listFiles()));
+        Log.d("File", "Userdir files: " + Arrays.toString(usersdir.listFiles()));
+
+        //check for active user
+        try {
+            if (activedir.createNewFile()) {
+                String activeout = FilenameUtils.removeExtension(usersdir.listFiles()[0].getName());
+                String jsonout = gson.toJson(activeout);
+                FileUtils.writeStringToFile(activedir, jsonout, "utf-8");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -83,6 +98,37 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Gson gson = new Gson();
+
+        //get active user name
+        String active;
+        File usersdir = new File(this.getFilesDir(), "users");
+        File activedir = new File(this.getFilesDir(), "active.json");
+
+        try {
+            String jsonin = FileUtils.readFileToString(activedir, "utf-8");
+            active = gson.fromJson(jsonin, String.class);
+            Log.i("File", "Active User:" + active);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //get active user object
+        User user;
+        File userdir = new File(usersdir, active + ".json");
+        try {
+            String jsonin = FileUtils.readFileToString(userdir, "utf-8");
+            user = gson.fromJson(jsonin, User.class);
+            Log.d("File", "User object built:" + user);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         //buttons
         Button foodNearMeButton = findViewById(R.id.menu_button_list);
@@ -92,15 +138,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent toFoodNearMe = new Intent(MainActivity.this, MapsActivity.class);
                 Log.i("radius" , Integer.toString(radius));
                 toFoodNearMe.putExtra(RADIUS, radius);
+                toFoodNearMe.putExtra(USER, user);
                 startActivity(toFoodNearMe);
-            }
-        });
-
-        Button blocklistButton = findViewById(R.id.menu_button_blocklist);
-        blocklistButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //
             }
         });
 
@@ -108,15 +147,21 @@ public class MainActivity extends AppCompatActivity {
         myProfilesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                Intent toProfiles = new Intent(MainActivity.this, UsersActivity.class);
+                toProfiles.putExtra(USER, user);
+                startActivity(toProfiles);
             }
         });
 
-    }
-
-
-    public void whereAmIButton(View view) {
-        // Add your code to handle button3 click event here
+        Button blocklistButton = findViewById(R.id.menu_button_blocklist);
+        blocklistButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toBlocklist = new Intent(MainActivity.this, BlocklistActivity.class);
+                toBlocklist.putExtra(USER, user);
+                startActivity(toBlocklist);
+            }
+        });
     }
 
     /*

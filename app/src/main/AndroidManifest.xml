@@ -17,9 +17,11 @@
         android:theme="@style/Theme.500011DProject"
         tools:targetApi="31">
         <activity
-            android:name=".NewActivity"
+            android:name=".BlocklistActivity"
             android:exported="false" />
-        <!-- Recommended for Android 9 (API level 28) and lower. -->
+        <activity
+            android:name=".NewActivity"
+            android:exported="false" /> <!-- Recommended for Android 9 (API level 28) and lower. -->
         <!-- Required for Android 10 (API level 29) and higher. -->
         <service
             android:name=".MapsActivity"
@@ -37,7 +39,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}"></meta-data>
+            android:value="${MAPS_API_KEY}" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
