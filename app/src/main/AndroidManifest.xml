@@ -46,6 +46,10 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <activity
+            android:name=".RestaurantActivity"
+            android:exported="false"
+            android:label="@string/title_activity_restaurant" />
 
         <activity
             android:name=".MapsActivity"

@@ -60,7 +60,7 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... voids) {
         OkHttpClient client = new OkHttpClient();
-        String apiKey = BuildConfig.MAPS_API_KEY; // Replace with your Google Maps API key
+        String apiKey = BuildConfig.MAPS_API_KEY;
         String types = "restaurant|cafe|meal_delivery|meal_takeway|bakery";
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/nearbysearch/json").newBuilder();
@@ -127,7 +127,6 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
         }
     }
     private String getImageURL(String photoReference) {
-        OkHttpClient client = new OkHttpClient();
         String apiKey = BuildConfig.MAPS_API_KEY; // Replace with your Google Maps API key
         BitmapDescriptor icon = null;
 

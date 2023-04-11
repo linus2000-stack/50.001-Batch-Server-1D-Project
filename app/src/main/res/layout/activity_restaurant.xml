@@ -39,7 +39,6 @@
         android:id="@+id/details_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/rubik_mono_one"
         android:text="@string/restaurant_details_label"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -109,27 +108,14 @@
 
 
 
-            <Button
-                android:id="@+id/restaurant_website_button"
-                style="?attr/materialButtonOutlinedStyle"
-                android:textColor="@color/blue"
-                app:strokeColor="@color/blue"
-                android:layout_marginStart="10dp"
-                app:strokeWidth="2dp"
-                android:textSize="14sp"
-                app:cornerRadius="10dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:text="Visit Website"
-                />
+
 
             <Button
                 android:id="@+id/restaurant_directions_button"
+                android:backgroundTint="@color/light_yellow"
                 style="?attr/materialButtonOutlinedStyle"
-                android:textColor="@color/blue"
-                app:strokeColor="@color/blue"
+                android:textColor="@color/black"
+                app:strokeColor="@color/yellow"
                 app:strokeWidth="2dp"
                 android:textSize="14sp"
                 app:cornerRadius="10dp"
