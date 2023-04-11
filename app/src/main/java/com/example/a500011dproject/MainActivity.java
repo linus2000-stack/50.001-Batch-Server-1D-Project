@@ -13,16 +13,61 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
     int radius;
-
     public final static String RADIUS = "RADIUS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //filesys init
+        Gson gson = new Gson();
+        File userdir = new File(this.getFilesDir(), "users");
+        userdir.mkdir();
+
+        //clear user dir
+//        for (File user: userdir.listFiles()) {
+//            user.delete();
+//        }
+//        Log.d("File", "All Users Cleared");
+
+        if ((userdir.listFiles().length) == 0) {
+            try {
+                DefaultUser user = new DefaultUser();
+                File defaultuserwrite = new File(userdir, user.getName() + ".json");
+                if (defaultuserwrite.createNewFile()) {
+                    String jsonout = gson.toJson(user);
+                    FileUtils.writeStringToFile(defaultuserwrite, jsonout, "utf-8");
+                    Log.i("File", "Default User created.");
+
+                    //test user
+                    try {
+                        String jsonin = FileUtils.readFileToString(defaultuserwrite, "utf-8");
+                        Log.d("File", "Default User Test: " + jsonin);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            catch (IOException e) {
+                Log.e("File", "Default User creation IO Error");
+                throw new RuntimeException(e);
+            }
+        }
+        Log.d("File", "Userdir files: " + Arrays.toString(userdir.listFiles()));
+
+        //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -38,20 +83,37 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        // Add your initialization code here
+
+        //buttons
+        Button foodNearMeButton = findViewById(R.id.menu_button_list);
+        foodNearMeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toFoodNearMe = new Intent(MainActivity.this, MapsActivity.class);
+                Log.i("radius" , Integer.toString(radius));
+                toFoodNearMe.putExtra(RADIUS, radius);
+                startActivity(toFoodNearMe);
+            }
+        });
+
+        Button blocklistButton = findViewById(R.id.menu_button_blocklist);
+        blocklistButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //
+            }
+        });
+
+        Button myProfilesButton = findViewById(R.id.menu_button_profiles);
+        myProfilesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO
+            }
+        });
+
     }
 
-    // Defining onClick methods
-    public void foodNearMeButton(View view) {
-        Intent toFoodNearMe = new Intent(MainActivity.this, MapsActivity.class);
-        Log.i("radius" , Integer.toString(radius));
-        toFoodNearMe.putExtra(RADIUS, radius);
-        startActivity(toFoodNearMe);
-    }
-
-    public void myProfilesButton(View view) {
-        // Add your code to handle button2 click event here
-    }
 
     public void whereAmIButton(View view) {
         // Add your code to handle button3 click event here
