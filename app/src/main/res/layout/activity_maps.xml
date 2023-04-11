@@ -56,7 +56,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="randomButton"
-        android:text="@string/randomButton"/>
+        android:text="@string/randomButton"
+        android:layout_marginHorizontal="@dimen/places_autocomplete_vertical_dropdown"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

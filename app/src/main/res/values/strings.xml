@@ -4,7 +4,7 @@
     <!-- Strings used for fragments for navigation -->
 
     <string name="menu_fragment_label">Main Menu</string>
-    <string name="menu_button_menu">where am I</string>
+    <string name="menu_button_blocklist">Block List</string>
     <string name="menu_button_list">Food Near Me</string>
     <string name="menu_button_profiles">My Profiles</string>
     <string name="welcome">Welcome *User_Placeholder*!</string>
@@ -40,6 +40,8 @@
     <string name="restaurant_details_button">Confirm</string>
 
     <string name="block_list_label">Block List</string>
+
+    <string name="blocklistSwitch">BlockList Activated?</string>
 
 
 </resources>

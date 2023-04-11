@@ -104,17 +104,16 @@
         android:textColor="@color/blue"
         android:textSize="14sp"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/menu_button_menu"
+        app:layout_constraintBottom_toTopOf="@id/menu_button_blocklist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/blue"
         app:strokeWidth="2dp" />
 
     <Button
-        android:id="@+id/menu_button_menu"
-        android:onClick="whereAmIButton"
-        android:text="@string/menu_button_menu"
-
+        android:id="@+id/menu_button_blocklist"
+        android:onClick="blocklistButton"
+        android:text="@string/menu_button_blocklist"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -133,6 +132,9 @@
         android:layout_marginBottom="20dp"
         app:strokeColor="@color/blue"
         app:strokeWidth="2dp" />
+
+
+
 
     <Button
         android:id="@+id/menu_button_list"

@@ -41,8 +41,8 @@ public class MapsActivity extends AppCompatActivity {
     Location userLocation;
     GoogleMap googleMap;
 
-    public ArrayList<Restaurant> ListOfRestaurants = new ArrayList<Restaurant>();
-    public Restaurant chosenRestaurant;
+    protected ArrayList<Restaurant> ListOfRestaurants = new ArrayList<Restaurant>();
+    protected Restaurant chosenRestaurant;
 
     Button randomButton;
 
@@ -97,7 +97,8 @@ public class MapsActivity extends AppCompatActivity {
                                     getNearbyPlacesTask.execute();
                                     ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
 
-                                    randomButton = (Button) findViewById(R.id.randomButton);
+                                    //randomButton = (Button) findViewById(R.id.randomButton);
+
 
                                 } else {
                                     Toast.makeText(MapsActivity.this, "HungryAlpacas requires your Location App Permissions", Toast.LENGTH_LONG).show();
@@ -116,7 +117,7 @@ public class MapsActivity extends AppCompatActivity {
         chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
         Log.d("Restaurant" , chosenRestaurant.getAddress());
         Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
-        Log.d("check intent", "intent from maps to restuarant");
+        Log.d("check intent", "intent from maps to restaurant");
         toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
         startActivity(toRandomise);
 

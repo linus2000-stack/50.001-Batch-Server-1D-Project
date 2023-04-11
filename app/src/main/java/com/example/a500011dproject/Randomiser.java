@@ -1,6 +1,7 @@
 package com.example.a500011dproject;
 
 import android.service.notification.NotificationListenerService;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,6 +22,8 @@ public class Randomiser{
         int index = random.nextInt(ListOfRestaurants.size());
         // obtain object Restaurant of chosen index
         Restaurant chosenRestaurant = ListOfRestaurants.get(index);
+        Log.d("chosenRestaurant", chosenRestaurant.getName());
         return chosenRestaurant;
+
     }
 }

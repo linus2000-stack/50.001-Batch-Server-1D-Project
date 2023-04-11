@@ -9,20 +9,9 @@ import java.util.ArrayList;
 
 public class Restaurant implements Parcelable {
 
-    public static final Parcelable.Creator<Restaurant> CREATOR = new Parcelable.Creator<Restaurant>() {
-        public Restaurant createFromParcel(Parcel in) {
-            return new Restaurant(in);
-        }
-
-        public Restaurant[] newArray(int size) {
-            return new Restaurant[size];
-
-        }
-    };
     private String placeId;
     private String name;
     private String address;
-
     private String rating;
     private String photoReference;
     public Restaurant(String placeId, String name, String address ,String rating, String photoReference) {
@@ -38,9 +27,7 @@ public class Restaurant implements Parcelable {
     public String getName() {
         return name;
     }
-    public String getAddress() {
-        return address;
-    }
+    public String getAddress() { return address;}
     public String getPhotoReference() {
         return photoReference;
     }
@@ -48,69 +35,41 @@ public class Restaurant implements Parcelable {
         return rating;
     }
 
-    public Restaurant(Parcel in){
-        this.placeId = in.readString();
-        this.name = in.readString();
-        this.address = in.readString();
-        this.rating = in.readString();
-        this.photoReference = in.readString();
-    }
 
+    public static final Parcelable.Creator<Restaurant> CREATOR = new Parcelable.Creator<Restaurant>() {
+        @Override
+        public Restaurant createFromParcel(Parcel in) {
+            return new Restaurant(in);
+        }
+        @Override
+        public Restaurant[] newArray(int size) {
+            return new Restaurant[size];
+        }
+    };
+    protected Restaurant(Parcel in){
+        placeId = in.readString();
+        name = in.readString();
+        address = in.readString();
+        rating = in.readString();
+        photoReference = in.readString();
+    }
     @Override
     public int describeContents(){
         return 0;
     }
-
     @Override
-    public void writeToParcel(@NonNull Parcel RestaurantActivity, int i) {
-        RestaurantActivity.writeArray(new Object[]{this.placeId,
-                                                    this.name,
-                                                    this.address,
-                                                    this.rating,
-                                                    this.photoReference});
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+//        RestaurantActivity.writeArray(new Object[]{this.placeId,
+//                                                    this.name,
+//                                                    this.address,
+//                                                    this.rating,
+//                                                    this.photoReference});
+        dest.writeString(placeId);
+        dest.writeString(name);
+        dest.writeString(address);
+        dest.writeString(rating);
+        dest.writeString(photoReference);
     }
-
 }
-//    private String id;
-//    private String name;
-//    private String address;
-//    private String imageUrl;
-//    private String phoneNumber;
-//    private String rating;
 
-//    public Restaurant(String id, String name, String address, String imageUrl, String phoneNumber, String rating) {
-//        this.id = id;
-//        this.name = name;
-//        this.address = address;
-//        this.imageUrl = imageUrl;
-//        this.phoneNumber = phoneNumber;
-//        this.rating = rating;
-//
-//    }
-//
-//    public String getId() {
-//        return id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public String getAddress() {
-//        return address;
-//    }
-//
-//    public String getImageUrl() {
-//        return imageUrl;
-//    }
-//
-//    public String getPhoneNumber() { return phoneNumber;
-//    }
-//
-//    public String getRating() {
-//        return rating;
-//    }
-
-
-//}
 
