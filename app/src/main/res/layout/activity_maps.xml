@@ -61,7 +61,7 @@
         android:text="@string/randomButton"
         android:layout_marginHorizontal="40dp"
         map:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="@+id/map"
         map:layout_constraintStart_toEndOf="@+id/linearLayout"
@@ -78,14 +78,10 @@
 
 
         <fragment
-
             android:id="@+id/google_map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-
-            />
+            android:layout_height="match_parent"/>
 
 
     </LinearLayout>
