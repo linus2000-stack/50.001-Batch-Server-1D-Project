@@ -67,6 +67,20 @@
         map:layout_constraintStart_toEndOf="@+id/linearLayout"
 
         />
+    <Button
+        android:layout_marginRight="20dp"
+        android:layout_marginHorizontal="40dp"
+        map:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_yellow"
+        android:textColor="@color/blue"
+        android:fontFamily="@font/rubik_mono_one"
+        android:id="@+id/confirm_location_button"
+        android:text="@string/confirm_location_button"/>
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
