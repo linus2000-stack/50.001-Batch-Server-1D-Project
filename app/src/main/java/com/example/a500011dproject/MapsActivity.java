@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -99,13 +98,17 @@ public class MapsActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View view) {
                                             Randomiser randomiser = new Randomiser(ListOfRestaurants);
-                                            chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
-                                            Log.d("Restaurant" , chosenRestaurant.getAddress());
-                                            Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
-                                            Log.d("check intent", "intent from maps to restaurant");
-                                            toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
-                                            toRandomise.putExtra("USER", user);
-                                            startActivity(toRandomise);
+                                            if (ListOfRestaurants.size() > 0){
+                                                chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
+                                                Log.d("Restaurant" , chosenRestaurant.getAddress());
+                                                Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
+                                                Log.d("check intent", "intent from maps to restaurant");
+                                                toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
+                                                toRandomise.putExtra("USER", user);
+                                                startActivity(toRandomise);
+                                            } else {
+                                                Toast.makeText(MapsActivity.this, "Please wait for the locations to load", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     });
 
