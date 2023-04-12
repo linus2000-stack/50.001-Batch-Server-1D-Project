@@ -73,66 +73,56 @@ public class MapsActivity extends AppCompatActivity {
             return;
         }
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    public void onSuccess(Location location) {
-                        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-                            @Override
-                            public void onMapReady(@NonNull GoogleMap googleMap) {
-                                if (location != null) {
-                                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                                    MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Current Location!");
-                                    googleMap.addMarker(markerOptions);
-                                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+            public void onSuccess(Location location) {
+                supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(@NonNull GoogleMap googleMap) {
+                        if (location != null) {
+                            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Current Location!");
+                            googleMap.addMarker(markerOptions);
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
-                                    // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
-                                    Bundle bundle = getIntent().getExtras();
-                                    int radius = bundle.getInt(MainActivity.RADIUS, 1500);
-                                    User user = bundle.getParcelable("USER");
-                                    Log.d("RADIUS", Integer.toString(radius)); // this keeps logging 0 for some reason, even with the default value above
-                                    String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
-                                    GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(googleMap, latLngString, location, MapsActivity.this); // should use constructor with radius to pass data
-                                    getNearbyPlacesTask.execute();
-                                    ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
+                            // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
+                            Bundle bundle = getIntent().getExtras();
+                            int radius = bundle.getInt(MainActivity.RADIUS, 1500);
+                            User user = bundle.getParcelable("USER");
+                            Log.d("RADIUS", Integer.toString(radius)); // this keeps logging 0 for some reason, even with the default value above
+                            String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
+                            GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(googleMap, latLngString, location, MapsActivity.this); // should use constructor with radius to pass data
+                            getNearbyPlacesTask.execute();
+                            ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
 
-                                    Button randomButton = (Button) findViewById(R.id.randomButton);
-                                    randomButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            Randomiser randomiser = new Randomiser(ListOfRestaurants);
-                                            if (ListOfRestaurants.size() > 0){
-                                                chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
-                                                Log.d("Restaurant" , chosenRestaurant.getAddress());
-                                                Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
-                                                Log.d("check intent", "intent from maps to restaurant");
-                                                toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
-                                                toRandomise.putExtra("USER", user);
-                                                startActivity(toRandomise);
-                                            } else {
-                                                Toast.makeText(MapsActivity.this, "Please wait for the locations to load", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-
-
-                                } else {
-                                    Toast.makeText(MapsActivity.this, "HungryAlpacas requires your Location App Permissions", Toast.LENGTH_LONG).show();
+                            Button randomButton = (Button) findViewById(R.id.randomButton);
+                            randomButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Randomiser randomiser = new Randomiser(ListOfRestaurants);
+                                    if (ListOfRestaurants.size() > 0){
+                                        chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
+                                        Log.d("Restaurant" , chosenRestaurant.getAddress());
+                                        Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
+                                        Log.d("check intent", "intent from maps to restaurant");
+                                        toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
+                                        toRandomise.putExtra("USER", user);
+                                        startActivity(toRandomise);
+                                    } else {
+                                        Toast.makeText(MapsActivity.this, "Please wait for the locations to load", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+
+
+                        } else {
+                            Toast.makeText(MapsActivity.this, "HungryAlpacas requires your Location App Permissions", Toast.LENGTH_LONG).show();
+                        }
                     }
+                });
+            }
         });
 
     }
 
-//    public void randomButton (View view){
-//        Randomiser randomiser = new Randomiser(ListOfRestaurants);
-//        chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
-//        Log.d("Restaurant" , chosenRestaurant.getAddress());
-//        Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
-//        Log.d("check intent", "intent from maps to restaurant");
-//        toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
-//        startActivity(toRandomise);
-//
-//    }
     /**
      * Callback method that gets called when the user responds to the permissions dialog
      */
