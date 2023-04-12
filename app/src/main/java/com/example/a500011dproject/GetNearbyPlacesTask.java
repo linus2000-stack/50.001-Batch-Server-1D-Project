@@ -44,19 +44,22 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
         return photoReference;
     }
     private Marker marker;
+    private User user;
 
-    public GetNearbyPlacesTask(GoogleMap googleMap, String latLngString, Location userLocation, int radius, Context context) {
+    public GetNearbyPlacesTask(GoogleMap googleMap, String latLngString, Location userLocation, int radius, Context context, User user) {
         gmap = googleMap;
         this.latLngString = latLngString;
         this.userLocation = userLocation;
         this.radius = radius;
         this.context = context;
+        this.user = user;
     }
-    public GetNearbyPlacesTask(GoogleMap googleMap, String latLngString,Location userLocation,Context context) {
+    public GetNearbyPlacesTask(GoogleMap googleMap, String latLngString,Location userLocation,Context context, User user) {
         gmap = googleMap;
         this.latLngString = latLngString;
         this.userLocation = userLocation;
         this.context = context;
+        this.user = user;
     }
 
     @Override
@@ -125,12 +128,12 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
                 Log.d("TAG", restaurant.toString());
                 Log.d("status", restaurant.getPriceLevel());
                 Log.d("status", restaurant.isOpenNow());
-                ListOfRestaurants.add(restaurant);
-
-                MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(name).snippet(address).icon(markerIcon);
-                marker = gmap.addMarker(markerOptions);
-                marker.setTag(restaurant);
-
+                if (!user.block.values().contains(name)) {
+                    ListOfRestaurants.add(restaurant);
+                    MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(name).snippet(address).icon(markerIcon);
+                    marker = gmap.addMarker(markerOptions);
+                    marker.setTag(restaurant);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
