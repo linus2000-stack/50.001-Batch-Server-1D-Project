@@ -30,6 +30,7 @@
     <string name="far">Far</string>
 
     <string name="randomButton">Randomise</string>
+    <string name="confirm_location_button">Eat Here Now</string>
 
     <string name="menu_food_alpacas">HUNGRY\nALPACAS</string>
     <string name="menu_detailed_restaurant_title">Restaurants </string>
