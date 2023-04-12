@@ -1,6 +1,7 @@
 package com.example.a500011dproject;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,14 +27,16 @@ import org.w3c.dom.Text;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
 
 public class RestaurantActivity extends AppCompatActivity {
 
-    ImageView restaurant_image_view;
+    ImageView restaurant_open_now_image_view;
     TextView restaurant_name_text_view;
     TextView restaurant_address_text_view;
     TextView restaurant_phone_text_view;
     TextView restaurant_rating_text_view;
+    TextView restaurant_price_level_text_view;
     Button restaurant_website_button;
     Button restaurant_directions_button;
     private Restaurant restaurant;
@@ -57,18 +60,34 @@ public class RestaurantActivity extends AppCompatActivity {
         String restaurantName = chosenRestaurant.getName();
         String restaurantAddress = chosenRestaurant.getAddress();
         String restaurantRating = chosenRestaurant.getRating();
-        String restaurantPhotoReference = chosenRestaurant.getPhotoReference();
+        String restaurantOpenNow = chosenRestaurant.isOpenNow();
+        String restaurantPriceLevel = chosenRestaurant.getPriceLevel();
+        if (Objects.equals(restaurantPriceLevel, "1")) {
+            restaurantPriceLevel = "$";
+        } else if (Objects.equals(restaurantPriceLevel, "2")){
+            restaurantPriceLevel = "$$";
+        } else{
+            restaurantPriceLevel = "$$$";
+        }
 
         // Set up the UI elements
-        //missing placeId
         TextView restaurantNameTextView = findViewById(R.id.restaurant_name_text_view);
         restaurantNameTextView.setText(restaurantName);
         TextView restaurantAddressTextView = findViewById(R.id.restaurant_address_text_view);
         restaurantAddressTextView.setText(restaurantAddress);
         TextView restaurantRatingTextView = findViewById(R.id.restaurant_rating_text_view);
         restaurantRatingTextView.setText(restaurantRating);
-        //missing photoReference
         Button directionsButton = findViewById(R.id.restaurant_directions_button);
+        ImageView restaurantOpenNowImageView = findViewById(R.id.restaurant_open_now_image_view);
+        if (restaurantOpenNow.equals("true")) {
+            restaurantOpenNowImageView.setImageResource(R.drawable.open_sign);
+        } else {
+            restaurantOpenNowImageView.setImageResource(R.drawable.closed_sign);
+        }
+        TextView restaurant_price_level_text_view = findViewById(R.id.restaurant_price_level_text_view);
+        restaurant_price_level_text_view.setText(restaurantPriceLevel);
+
+
 
         //NOT SURE IF WANNA DELETE (LMK?)
 //        ImageView restaurantImageView = findViewById(R.id.restaurant_image_view);

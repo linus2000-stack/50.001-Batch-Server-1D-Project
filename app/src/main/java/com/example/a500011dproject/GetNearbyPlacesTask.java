@@ -6,11 +6,14 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -106,26 +109,28 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
                 String name = result.getString("name");
                 String address = result.getString("vicinity");
                 String placeId = result.getString("place_id");
-
-                // Getting photo reference (might be the reason for throwing any error) - need this to work get photos to work in activity_restaurant.xml
-//                JSONObject photoObject = result.getJSONObject("photos");
-//                String photoReference = photoObject.getString("photo_reference");
-
-
-                String rating = result.getString("rating");
+                String rating = result.optString("rating");
+                String priceLevel = result.getString("price_level");
+                JSONObject openNowObject = result.getJSONObject("opening_hours");
+                String openNow = openNowObject.getString("open_now"); // possibly a boolean?
 
                 //Add new Restaurant to ListOfRestaurant
-                Restaurant restaurant = new Restaurant(placeId,name,address,rating,photoReference);
-                System.out.println(restaurant.getName());
+                Restaurant restaurant = new Restaurant(placeId, name, address, rating, priceLevel,openNow);
+                Log.d("TAG", restaurant.toString());
+                Log.d("status", restaurant.getPriceLevel());
+                Log.d("status", restaurant.isOpenNow());
                 ListOfRestaurants.add(restaurant);
 
                 MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(name).snippet(address).icon(markerIcon);
                 googleMap.addMarker(markerOptions);
+
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
     private String getImageURL(String photoReference) {
         String apiKey = BuildConfig.MAPS_API_KEY; // Replace with your Google Maps API key
         BitmapDescriptor icon = null;

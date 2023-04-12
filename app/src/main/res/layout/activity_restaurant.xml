@@ -61,13 +61,14 @@
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/restaurant_image_view"
+            android:id="@+id/restaurant_open_now_image_view"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:background="@color/design_default_color_on_primary"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/restaurant_open_now"/>
 
         <TextView
             android:id="@+id/restaurant_name_text_view"
@@ -101,6 +102,15 @@
             android:layout_marginTop="8dp"
             android:text="@string/restaurant_rating_text_view"
             android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/restaurant_price_level_text_view"
+            android:text="Price Level"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
