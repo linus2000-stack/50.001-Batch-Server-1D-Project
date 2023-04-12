@@ -1,13 +1,11 @@
 package com.example.a500011dproject;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -30,7 +28,7 @@ import okhttp3.Response;
 
 public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
 
-    GoogleMap googleMap;
+    GoogleMap gmap;
     String latLngString;
     Location userLocation;
     int radius = 1500;
@@ -45,16 +43,17 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
     public String getPhotoReference() {
         return photoReference;
     }
+    private Marker marker;
 
     public GetNearbyPlacesTask(GoogleMap googleMap, String latLngString, Location userLocation, int radius, Context context) {
-        this.googleMap = googleMap;
+        gmap = googleMap;
         this.latLngString = latLngString;
         this.userLocation = userLocation;
         this.radius = radius;
         this.context = context;
     }
     public GetNearbyPlacesTask(GoogleMap googleMap, String latLngString,Location userLocation,Context context) {
-        this.googleMap = googleMap;
+        gmap = googleMap;
         this.latLngString = latLngString;
         this.userLocation = userLocation;
         this.context = context;
@@ -88,6 +87,8 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String responseBody) {
         super.onPostExecute(responseBody);
 
+        String priceLevel;
+
         // Parse the JSON response
         try {
             JSONObject jsonObject = new JSONObject(responseBody);
@@ -110,20 +111,25 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
                 String address = result.getString("vicinity");
                 String placeId = result.getString("place_id");
                 String rating = result.optString("rating");
-                String priceLevel = result.getString("price_level");
+                if (result.has("price_level")) {
+                    priceLevel = result.getString("price_level");
+                }
+                else {
+                    priceLevel = "Not found";
+                }
                 JSONObject openNowObject = result.getJSONObject("opening_hours");
                 String openNow = openNowObject.getString("open_now"); // possibly a boolean?
 
                 //Add new Restaurant to ListOfRestaurant
-                Restaurant restaurant = new Restaurant(placeId, name, address, rating, priceLevel,openNow);
+                Restaurant restaurant = new Restaurant(placeId, name, address, rating, priceLevel ,openNow);
                 Log.d("TAG", restaurant.toString());
                 Log.d("status", restaurant.getPriceLevel());
                 Log.d("status", restaurant.isOpenNow());
                 ListOfRestaurants.add(restaurant);
 
                 MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(name).snippet(address).icon(markerIcon);
-                googleMap.addMarker(markerOptions);
-
+                marker = gmap.addMarker(markerOptions);
+                marker.setTag(restaurant);
 
             }
         } catch (JSONException e) {
@@ -145,7 +151,6 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
 
         return url;
     }
-
 
 }
 

@@ -25,19 +25,24 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MapsActivity extends AppCompatActivity {
+public class MapsActivity extends AppCompatActivity implements GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback {
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient fusedLocationClient;
+    PlacesClient placesClient;
     int requestCode = 100;
     Location userLocation;
-    GoogleMap googleMap;
+    GoogleMap gmap;
+    User user;
+    int radius;
 
     protected ArrayList<Restaurant> ListOfRestaurants = new ArrayList<Restaurant>();
     protected Restaurant chosenRestaurant;
@@ -48,18 +53,47 @@ public class MapsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+        supportMapFragment.getMapAsync(this);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        Bundle bundle = getIntent().getExtras();
+        radius = bundle.getInt(MainActivity.RADIUS, 1500);
+        user = bundle.getParcelable("USER");
+        Log.d("User", "User:" + user.toString());
 
-
-        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         String apiKey = BuildConfig.MAPS_API_KEY;
         Places.initialize(getApplicationContext(), apiKey);
-        PlacesClient placesClient = Places.createClient(this);
-
+        placesClient = Places.createClient(this);
 
         // Created an instance of the Fused Location Provider Client
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        randomButton = (Button) findViewById(R.id.randomButton);
+        randomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Randomiser randomiser = new Randomiser(ListOfRestaurants);
+                if (ListOfRestaurants.size() > 0) {
+                    chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
+                    Log.d("Restaurant", chosenRestaurant.getAddress());
+                    Intent toRandomise = new Intent(MapsActivity.this, RestaurantActivity.class);
+                    Log.d("check intent", "intent from maps to restaurant");
+                    toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
+                    toRandomise.putExtra("USER", user);
+                    startActivity(toRandomise);
+                } else {
+                    Toast.makeText(MapsActivity.this, "Please wait for the locations to load", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        gmap = googleMap;
+        gmap.setOnInfoWindowClickListener(this);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -72,55 +106,37 @@ public class MapsActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, requestCode);
             return;
         }
+
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
             public void onSuccess(Location location) {
-                supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(@NonNull GoogleMap googleMap) {
-                        if (location != null) {
-                            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Current Location!");
-                            googleMap.addMarker(markerOptions);
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-
-                            // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
-                            Bundle bundle = getIntent().getExtras();
-                            int radius = bundle.getInt(MainActivity.RADIUS, 1500);
-                            User user = bundle.getParcelable("USER");
-                            Log.d("RADIUS", Integer.toString(radius)); // this keeps logging 0 for some reason, even with the default value above
-                            String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
-                            GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(googleMap, latLngString, location, MapsActivity.this); // should use constructor with radius to pass data
-                            getNearbyPlacesTask.execute();
-                            ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
-
-                            Button randomButton = (Button) findViewById(R.id.randomButton);
-                            randomButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Randomiser randomiser = new Randomiser(ListOfRestaurants);
-                                    if (ListOfRestaurants.size() > 0){
-                                        chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
-                                        Log.d("Restaurant" , chosenRestaurant.getAddress());
-                                        Intent toRandomise = new Intent(MapsActivity.this,RestaurantActivity.class);
-                                        Log.d("check intent", "intent from maps to restaurant");
-                                        toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
-                                        toRandomise.putExtra("USER", user);
-                                        startActivity(toRandomise);
-                                    } else {
-                                        Toast.makeText(MapsActivity.this, "Please wait for the locations to load", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-
-
-                        } else {
-                            Toast.makeText(MapsActivity.this, "HungryAlpacas requires your Location App Permissions", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                if (location != null) {
+                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Current Location!");
+                    gmap.addMarker(markerOptions);
+                    gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                    // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
+                    Log.d("RADIUS", Integer.toString(radius)); // this keeps logging 0 for some reason, even with the default value above
+                    String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
+                    GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(gmap, latLngString, location, MapsActivity.this); // should use constructor with radius to pass data
+                    getNearbyPlacesTask.execute();
+                    ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
+                    Log.d("Restaurants", ListOfRestaurants.toString());
+                } else {
+                    Toast.makeText(MapsActivity.this, "HungryAlpacas requires your Location App Permissions", Toast.LENGTH_LONG).show();
+                }
             }
         });
+    }
 
+    @Override
+    public void onInfoWindowClick(@NonNull Marker marker) {
+        Log.d("Map", marker.toString());
+        Restaurant chosenRestaurant = (Restaurant) marker.getTag();
+        Intent toRestaurant = new Intent(MapsActivity.this, RestaurantActivity.class);
+        Log.d("check intent", "intent from maps to restaurant");
+        toRestaurant.putExtra("chosenRestaurant", chosenRestaurant);
+        toRestaurant.putExtra("USER", user);
+        startActivity(toRestaurant);
     }
 
     /**
