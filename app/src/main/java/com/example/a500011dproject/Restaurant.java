@@ -1,5 +1,6 @@
 package com.example.a500011dproject;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -13,13 +14,15 @@ public class Restaurant implements Parcelable {
     private String name;
     private String address;
     private String rating;
-    private String photoReference;
-    public Restaurant(String placeId, String name, String address ,String rating, String photoReference) {
+    private String priceLevel;
+    private String openNow;
+    public Restaurant(String placeId, String name, String address ,String rating, String priceLevel, String openNow) {
         this.placeId = placeId;
         this.name = name;
         this.address = address;
         this.rating = rating;
-        this.photoReference = photoReference;
+        this.priceLevel = priceLevel;
+        this.openNow = openNow;
     }
     public String getPlaceId() {
         return placeId;
@@ -28,13 +31,18 @@ public class Restaurant implements Parcelable {
         return name;
     }
     public String getAddress() { return address;}
-    public String getPhotoReference() {
-        return photoReference;
-    }
+
     public String getRating() {
         return rating;
     }
 
+    public String getPriceLevel() {
+        return priceLevel;
+    }
+
+    public String isOpenNow() {
+        return openNow;
+    }
 
     public static final Parcelable.Creator<Restaurant> CREATOR = new Parcelable.Creator<Restaurant>() {
         @Override
@@ -51,7 +59,8 @@ public class Restaurant implements Parcelable {
         name = in.readString();
         address = in.readString();
         rating = in.readString();
-        photoReference = in.readString();
+        priceLevel = in.readString();
+        openNow = in.readString();
     }
     @Override
     public int describeContents(){
@@ -63,7 +72,8 @@ public class Restaurant implements Parcelable {
         dest.writeString(name);
         dest.writeString(address);
         dest.writeString(rating);
-        dest.writeString(photoReference);
+        dest.writeString(priceLevel);
+        dest.writeString(openNow);
     }
 }
 
