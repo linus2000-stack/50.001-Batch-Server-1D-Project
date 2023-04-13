@@ -92,10 +92,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.near:       //implement variables from MAIN
                         radius = 500;
+                        break;
                     case R.id.normal:
                         radius = 1000;
+                        break;
                     case R.id.far:
                         radius = 1500;
+                        break;
                 }
                 return false;
             }

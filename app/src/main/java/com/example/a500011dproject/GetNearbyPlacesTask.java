@@ -31,7 +31,7 @@ public class GetNearbyPlacesTask extends AsyncTask<Void, Void, String> {
     GoogleMap gmap;
     String latLngString;
     Location userLocation;
-    int radius = 1500;
+    int radius;
     private String photoReference;
     private Context context;
     private ArrayList<Restaurant> ListOfRestaurants = new ArrayList<>();

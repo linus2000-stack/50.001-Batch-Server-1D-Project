@@ -32,14 +32,12 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback {
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient fusedLocationClient;
     PlacesClient placesClient;
     int requestCode = 100;
-    Location userLocation;
     GoogleMap gmap;
     User user;
     int radius;
@@ -117,7 +115,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnInfoW
                     // Call AsyncTask -> moving network request to background thread due to android.os.NetworkOnMainThreadException
                     Log.d("RADIUS", Integer.toString(radius)); // this keeps logging 0 for some reason, even with the default value above
                     String latLngString = Double.toString(latLng.latitude) + "," + Double.toString(latLng.longitude);
-                    GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(gmap, latLngString, location, MapsActivity.this, user); // should use constructor with radius to pass data
+                    GetNearbyPlacesTask getNearbyPlacesTask = new GetNearbyPlacesTask(gmap, latLngString, location,radius, MapsActivity.this, user); // should use constructor with radius to pass data
                     getNearbyPlacesTask.execute();
                     ListOfRestaurants = getNearbyPlacesTask.getListOfRestaurants();
                     Log.d("Restaurants", ListOfRestaurants.toString());
