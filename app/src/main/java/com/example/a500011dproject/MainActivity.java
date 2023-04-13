@@ -87,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.near:       //implement variables from MAIN
-                        radius = 500;
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                switch (item.getItemId()) {
+                                    case R.id.near:       //implement variables from MAIN
+                                        radius = 500;
                     case R.id.normal:
                         radius = 1000;
                     case R.id.far:

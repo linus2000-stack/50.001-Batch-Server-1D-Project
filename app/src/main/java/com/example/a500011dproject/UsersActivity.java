@@ -73,6 +73,7 @@ public class UsersActivity extends AppCompatActivity {
                 }
             }
         });
+        
         rvUsers.setLayoutManager(new LinearLayoutManager(this));
 
         FloatingActionButton usersNewButton = findViewById(R.id.users_new_button);
