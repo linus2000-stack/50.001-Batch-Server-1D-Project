@@ -11,10 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -46,6 +48,8 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnInfoW
     protected Restaurant chosenRestaurant;
 
     Button randomButton;
+    ImageButton map_button_back;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,6 +128,15 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnInfoW
                 }
             }
         });
+        //Button to go back
+        ImageButton map_button_back = findViewById(R.id.map_button_back);
+        map_button_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goBack = new Intent(MapsActivity.this, MainActivity.class);
+                startActivity(goBack);
+            }
+        });
     }
 
     @Override
@@ -136,6 +149,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnInfoW
         toRestaurant.putExtra("USER", user);
         startActivity(toRestaurant);
     }
+
 
     /**
      * Callback method that gets called when the user responds to the permissions dialog

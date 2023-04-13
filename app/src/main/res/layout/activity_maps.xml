@@ -43,7 +43,6 @@
         android:layout_height="30dp"
         android:layout_marginStart="30dp"
         android:background="@android:color/transparent"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar"
         map:layout_constraintBottom_toBottomOf="@id/toolbar"

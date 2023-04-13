@@ -16,7 +16,6 @@
         app:popupTheme="@style/Theme.500011DProject.PopupOverlay"
         app:menu="@menu/menu_main"
         app:layout_constraintTop_toTopOf="parent"
-
         >
 
     </androidx.appcompat.widget.Toolbar>
@@ -26,7 +25,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="30dp"
-
         android:background="@android:color/transparent"
         android:layout_marginEnd="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +42,6 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:fontFamily="@font/rubik_mono_one"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar"
@@ -80,20 +77,33 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/restaurant_address_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/restaurant_address_header"
+            android:textSize="20dp"
+            android:textFontWeight="2"
+            />
+
+
+        <TextView
             android:id="@+id/restaurant_address_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/restaurant_address_text_view"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textAlignment="viewStart"
+            />
 
         <TextView
-            android:id="@+id/restaurant_phone_text_view"
+            android:id="@+id/restaurant_rating_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/restaurant_phone_text_view"
-            android:textSize="16sp" />
+            android:text="@string/restaurant_rating_header"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/restaurant_rating_text_view"
@@ -101,15 +111,25 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/restaurant_rating_text_view"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textAlignment="viewStart"/>
+
+        <TextView
+            android:id="@+id/restaurant_price_level_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/restaurant_price_level_header"
+            android:layout_marginTop="8dp"
+            android:textSize="20dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/restaurant_price_level_text_view"
-            android:text="Price Level"
+            android:text="@string/restaurant_price_level"
             android:layout_marginTop="8dp"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textAlignment="viewStart"/>
 
 
         <LinearLayout

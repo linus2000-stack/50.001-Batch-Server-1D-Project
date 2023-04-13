@@ -31,9 +31,16 @@ public class BlocklistActivity extends AppCompatActivity {
         for (Date date: arrDates) {
             arrPlaces.add(user.block.get(date));
         }
+        for (int i = 0; i < arrDates.size(); i++){
+
+        }
+
+
         RecyclerView rvBlock = (RecyclerView) findViewById(R.id.block_list);
         BlockAdapter adapter = new BlockAdapter(arrDates, arrPlaces);
         rvBlock.setAdapter(adapter);
         rvBlock.setLayoutManager(new LinearLayoutManager(this));
+
+
     }
 }
