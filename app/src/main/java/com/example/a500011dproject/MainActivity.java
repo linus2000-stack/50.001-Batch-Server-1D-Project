@@ -26,7 +26,7 @@ import java.text.DateFormat;
 import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
-    int radius;
+    int radius=1500;
     public final static String RADIUS = "RADIUS";
 
     @Override
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         radius = 1000;
                         break;
                     case R.id.far:
-                        radius = 1500;
+                        radius = 2000;
                         break;
                 }
                 return false;
