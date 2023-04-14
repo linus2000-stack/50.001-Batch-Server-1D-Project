@@ -13,4 +13,9 @@
     <color name="light_yellow">#f2d034</color>
     <color name="dark_grey">#a1a3a6</color>
     <color name="grey">#E3E4E0</color>
+
+    <!--Wheel Colours-->
+    <color name="pastel_red">#fc6c6c</color>
+    <color name="aqua">#00E6FF</color>
+    <color name="red_purple">#F00E6F</color>
 </resources>

@@ -1,9 +1,11 @@
 package com.example.a500011dproject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -36,7 +38,8 @@ public class WheelActivity extends AppCompatActivity {
         User user = bundle.getParcelable("USER");
         ArrayList<Restaurant> ListOfRestaurants = getIntent().getParcelableArrayListExtra("List of restaurants");
         Randomiser randomiser = new Randomiser(ListOfRestaurants);
-        generateWheelItems(ListOfRestaurants);
+        ArrayList<String> colorList = generateColorList();
+        generateWheelItems(ListOfRestaurants, colorList);
         wheel = findViewById(R.id.wheel);
         wheel.addWheelItems(wheelItems);
 
@@ -56,17 +59,33 @@ public class WheelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 chosenRestaurantIndex = randomiser.RandomRestaurant(ListOfRestaurants);
                 chosenRestaurant = ListOfRestaurants.get(chosenRestaurantIndex);
-                wheel.rotateWheelTo(chosenRestaurantIndex); // chosen restaurant
+                Log.d("CHOSEN", chosenRestaurant.getName());
+                wheel.rotateWheelTo(chosenRestaurantIndex+1); // chosen restaurant
             }
         });
     }
 
-    private void generateWheelItems(ArrayList<Restaurant> ListOfRestaurants) {
+    private void generateWheelItems(ArrayList<Restaurant> ListOfRestaurants, ArrayList<String> colorList) {
         wheelItems = new ArrayList<>();
-        ArrayList<Color> colorArrayList = new ArrayList<>();
-        //need a list of colours to choose from
-        for (Restaurant restaurant : ListOfRestaurants){
-            wheelItems.add(new WheelItem(Color.parseColor("#fc6c6c"),restaurant.getName()));
+        int r = ListOfRestaurants.size();
+        int c = colorList.size();
+        /*for (Restaurant restaurant : ListOfRestaurants){
+            wheelItems.add(new WheelItem(Color.parseColor(String.valueOf(R.color.pastel_red)),restaurant.getName()));
+        }*/
+        Log.d("ADDING","starting add");
+        for (int i =0 ; i < r ; i++) {
+            String restaurantName = ListOfRestaurants.get(i).getName();
+            String color = colorList.get(i%c);
+            wheelItems.add(new WheelItem(Color.parseColor(color),restaurantName));
         }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private ArrayList<String> generateColorList(){
+        ArrayList<String> colorList = new ArrayList<>();
+        colorList.add("#fc6c6c");
+        colorList.add("#00E6FF");
+        colorList.add("#F00E6F");
+        return colorList;
     }
 }
