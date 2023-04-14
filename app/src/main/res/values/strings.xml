@@ -61,4 +61,7 @@
     <string name="new_cancel">Cancel</string>
 
     <string name="users_active">Test</string>
+
+    <string name="wheel_label">Lucky Wheel</string>
+    <string name="start">Start</string>
 </resources>

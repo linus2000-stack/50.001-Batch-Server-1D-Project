@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,10 +47,10 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnInfoW
 
     protected ArrayList<Restaurant> ListOfRestaurants = new ArrayList<Restaurant>();
     protected Restaurant chosenRestaurant;
+    protected Integer chosenRestaurantIndex;
 
     Button randomButton;
     ImageButton map_button_back;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,11 +79,13 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnInfoW
             public void onClick(View view) {
                 Randomiser randomiser = new Randomiser(ListOfRestaurants);
                 if (ListOfRestaurants.size() > 0) {
-                    chosenRestaurant = randomiser.RandomRestaurant(ListOfRestaurants);
-                    Log.d("Restaurant", chosenRestaurant.getAddress());
-                    Intent toRandomise = new Intent(MapsActivity.this, RestaurantActivity.class);
+                    //chosenRestaurantIndex = randomiser.RandomRestaurant(ListOfRestaurants);
+                    //chosenRestaurant = ListOfRestaurants.get(chosenRestaurantIndex);
+                    //Log.d("Restaurant", chosenRestaurant.getAddress());
+                    Intent toRandomise = new Intent(MapsActivity.this, WheelActivity.class);
                     Log.d("check intent", "intent from maps to restaurant");
-                    toRandomise.putExtra("chosenRestaurant", chosenRestaurant);
+                    toRandomise.putParcelableArrayListExtra("List of restaurants",  ListOfRestaurants);
+                    //toRandomise.putExtra("restaurantList", ListOfRestaurants);
                     toRandomise.putExtra("USER", user);
                     startActivity(toRandomise);
                 } else {
@@ -184,13 +187,14 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnInfoW
                 Log.d("BACK","Back from main");
                 this.finish(); // destroys current activity (CHANGE)
                 return true;
-            /*case R.id.near:       //implement variables from MAIN
+            case R.id.near:       //implement variables from MAIN
                 Log.d("set","NEAR");
                 radius = 500;
+                Log.d("radius",String.valueOf(radius));
             case R.id.normal:
                 radius = 1000;
             case R.id.far:
-                radius = 1500;*/
+                radius = 1500;
             }
         return super.onOptionsItemSelected(item);
     }

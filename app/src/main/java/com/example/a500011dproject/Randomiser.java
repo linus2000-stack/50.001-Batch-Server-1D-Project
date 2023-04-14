@@ -15,7 +15,7 @@ public class Randomiser{
         return ListOfRestaurants;
     }
 
-    public Restaurant RandomRestaurant(ArrayList<Restaurant> ListOfRestaurants){
+    public Integer RandomRestaurant(ArrayList<Restaurant> ListOfRestaurants){
         //create random object
         Random random = new Random();
         //generate random index less than size of array
@@ -24,7 +24,7 @@ public class Randomiser{
         // obtain object Restaurant of chosen index
         Restaurant chosenRestaurant = ListOfRestaurants.get(index);
         Log.d("chosenRestaurant", chosenRestaurant.getName());
-        return chosenRestaurant;
+        return index;
 
     }
 }
