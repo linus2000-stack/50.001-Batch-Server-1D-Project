@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 public class BlockList {
@@ -41,6 +42,17 @@ public class BlockList {
         return blockedRestaurants;
     }
 
+    public void removeRestaurantFromBlockList(String restaurantName) {
+        Iterator<VisitedRestaurant> iterator = visitedRestaurants.iterator();
+
+        while (iterator.hasNext()) {
+            VisitedRestaurant visitedRestaurant = iterator.next();
+            if (visitedRestaurant.getName().equalsIgnoreCase(restaurantName)) {
+                iterator.remove();
+            }
+        }
+    }
+
     // android studio added this line of code below @RequiresAPi
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void main(String[] args) {
@@ -55,6 +67,12 @@ public class BlockList {
         // code line before correction: List<String> blockedRestaurants = blockList.getBlockedRestaurants(x);
         List<String> blockedRestaurants = blockList.getBlockedRestaurants(x);
         System.out.println("Blocked restaurants within " + x + " days:");
+        blockedRestaurants.forEach(System.out::println);
+
+        // Remove a restaurant from the block list
+        blockList.removeRestaurantFromBlockList("Burger King");
+        System.out.println("\nBlocked restaurants after removing Burger King:");
+        blockedRestaurants = blockList.getBlockedRestaurants(x);
         blockedRestaurants.forEach(System.out::println);
     }
 }
