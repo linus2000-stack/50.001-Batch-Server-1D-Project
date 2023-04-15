@@ -67,5 +67,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public interface OnClickListener {
         void onClick(User user);
     }
+
+    public void deleteUser(User userToDelete) {
+        int position = users.indexOf(userToDelete);
+        if (position >= 0) {
+            users.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
 }
 
