@@ -8,13 +8,13 @@ import androidx.annotation.NonNull;
 import java.util.Date;
 import java.util.HashMap;
 
-public class User implements Parcelable, Comparable<User> {
+public class User implements Parcelable {
     private String name;
     public HashMap<Date, String> block;
 
-    User(String name) {
-        this.name = name;
-        this.block = new HashMap<>();
+    private User(UserBuilder builder) {
+        this.name = builder.name;
+        this.block = builder.block;
     }
 
     protected User(Parcel in) {
@@ -49,8 +49,22 @@ public class User implements Parcelable, Comparable<User> {
         return name;
     }
 
-    @Override
-    public int compareTo(User u) {
-        return this.name.compareTo(u.name);
+    public static class UserBuilder {
+        private String name;
+        private HashMap<Date, String> block;
+
+        public UserBuilder(String name) {
+            this.name = name;
+        }
+
+        public UserBuilder setOptional(HashMap<Date, String> block) {
+            this.block = block;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
+
 }

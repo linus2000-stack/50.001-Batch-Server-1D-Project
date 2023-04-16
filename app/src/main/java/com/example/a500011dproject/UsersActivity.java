@@ -53,7 +53,7 @@ public class UsersActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
-        Collections.sort(arrUsers);
+        Collections.sort(arrUsers, new UserComparator());
         Log.d("Users", arrUsers.toString());
 
         RecyclerView rvUsers = (RecyclerView) findViewById(R.id.users_list);

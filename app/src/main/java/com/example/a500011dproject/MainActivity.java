@@ -50,10 +50,13 @@ public class MainActivity extends AppCompatActivity {
         //check for default user
         if ((usersdir.listFiles().length) == 0) {
             try {
-                DefaultUser user = new DefaultUser();
-                File userdir = new File(usersdir, user.getName() + ".json");
+                HashMap<Date, String> testEntry = new HashMap<>();
+                Date date = new Date();
+                testEntry.put(date, "Test Restaurant");
+                User defaultUser = new User.UserBuilder("Default").setOptional(testEntry).build();
+                File userdir = new File(usersdir, defaultUser.getName() + ".json");
                 if (userdir.createNewFile()) {
-                    String jsonout = gson.toJson(user);
+                    String jsonout = gson.toJson(defaultUser);
                     FileUtils.writeStringToFile(userdir, jsonout, "utf-8");
                     Log.i("File", "Default User created.");
 

@@ -36,7 +36,7 @@ public class NewActivity extends AppCompatActivity {
                 String name = nameEdit.getText().toString();
 
                 if (name.length() != 0) {
-                    User user = new User(name);
+                    User user = new User.UserBuilder(name).build();
                     File userwrite = new File(userdir, user.getName() + ".json");
                     String userjson = gson.toJson(user);
                     try {
