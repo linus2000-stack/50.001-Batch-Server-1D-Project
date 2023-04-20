@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,6 +42,15 @@ public class BlocklistActivity extends AppCompatActivity {
         BlockAdapter adapter = new BlockAdapter(arrDates, arrPlaces);
         rvBlock.setAdapter(adapter);
         rvBlock.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter.setOnClickListener(new BlockAdapter.OnLongClickListener() {
+            @Override
+            public void onLongClick(String place) {
+                Toast.makeText(BlocklistActivity.this, "Name is clicked", Toast.LENGTH_SHORT).show();
+            }
+        }
+        );
+
 
 
     }

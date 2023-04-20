@@ -19,6 +19,7 @@ public class BlockAdapter extends RecyclerView.Adapter<BlockAdapter.ViewHolder> 
 
     ArrayList<String> places;
     ArrayList<Date> dates;
+    private OnLongClickListener onLongClickListener;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView placeTextView;
@@ -55,9 +56,29 @@ public class BlockAdapter extends RecyclerView.Adapter<BlockAdapter.ViewHolder> 
 
         TextView dateTextView = holder.dateTextView;
         dateTextView.setText(date.toString());
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (onLongClickListener != null){
+                    onLongClickListener.onLongClick(place);
+                    return true;
+                }
+                else{ return false;}
+            }
+        });
+
     }
 
     public int getItemCount() {
         return dates.size();
     }
+
+    public void setOnClickListener (OnLongClickListener onLongClickListener){
+        this.onLongClickListener = onLongClickListener;
+    }
+    public interface  OnLongClickListener {
+        void onLongClick (String place);
+    }
 }
+
