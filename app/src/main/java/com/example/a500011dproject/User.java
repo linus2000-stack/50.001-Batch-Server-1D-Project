@@ -51,7 +51,7 @@ public class User implements Parcelable {
 
     public static class UserBuilder {
         private String name;
-        private HashMap<Date, String> block;
+        private HashMap<Date, String> block = new HashMap<>();
 
         public UserBuilder(String name) {
             this.name = name;
