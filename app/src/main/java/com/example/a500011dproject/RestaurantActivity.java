@@ -98,34 +98,15 @@ public class RestaurantActivity extends AppCompatActivity {
         TextView restaurant_price_level_text_view = findViewById(R.id.restaurant_price_level_text_view);
         restaurant_price_level_text_view.setText(restaurantPriceLevel);
 
-
-
-        //NOT SURE IF WANNA DELETE (LMK?)
-//        ImageView restaurantImageView = findViewById(R.id.restaurant_image_view);
-        //restaurantImageView.setImageResource();
-//        TextView restaurantNameTextView = findViewById(R.id.restaurant_name_text_view);
-//        restaurantNameTextView .setText(restaurantName);
-//        TextView restaurantAddressTextView = findViewById(R.id.restaurant_address_text_view);
-//        TextView restaurantPhoneTextView = findViewById(R.id.restaurant_phone_text_view);
-//        TextView restaurantRatingTextView = findViewById(R.id.restaurant_rating_text_view);
-//        Button restaurantWebsiteButton = findViewById(R.id.restaurant_website_button);
-//        Button directionsButton = findViewById(R.id.restaurant_directions_button);
-
-        // Set the data for the UI elements
-        //restaurantImageView.setImageResource(restaurant.getImageUrl());
-        // I need to find another implementation to make an image show up in the activity_restaurant.xml
-        // My URL currently is a String - setImageResource is done with integer
-
-        // Set the click listeners for the buttons did u
-
-
         directionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Adds restaurant to blocklist
                 Date date = new Date();
                 File userdir = new File(usersdir, user.getName() + ".json");
-                user.block.put(date, restaurantName);
+                if (!user.block.containsValue(restaurantName)) {
+                    user.block.put(date, restaurantName);
+                }
                 String jsonout = gson.toJson(user);
                 try {
                     FileUtils.writeStringToFile(userdir, jsonout, "utf-8");
