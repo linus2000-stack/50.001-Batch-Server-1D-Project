@@ -91,9 +91,9 @@ public class RestaurantActivity extends AppCompatActivity {
         Button directionsButton = findViewById(R.id.restaurant_directions_button);
         ImageView restaurantOpenNowImageView = findViewById(R.id.restaurant_open_now_image_view);
         if (restaurantOpenNow.equals("true")) {
-            restaurantOpenNowImageView.setImageResource(R.drawable.baseline_check_24);
+            restaurantOpenNowImageView.setImageResource(R.drawable.open_sign);
         } else {
-            restaurantOpenNowImageView.setImageResource(R.drawable.cross_red);
+            restaurantOpenNowImageView.setImageResource(R.drawable.closed_sign);
         }
         TextView restaurant_price_level_text_view = findViewById(R.id.restaurant_price_level_text_view);
         restaurant_price_level_text_view.setText(restaurantPriceLevel);

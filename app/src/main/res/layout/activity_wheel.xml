@@ -18,7 +18,9 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
         android:background="#00E6FF"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/rubik_mono_one"
         android:text="@string/start"/>
 
 </RelativeLayout>
